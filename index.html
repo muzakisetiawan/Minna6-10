@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
-<title>和 Flashcards — Belajar Bahasa Jepang N5 (Bab 6 Minna no Nihongo)</title>
+<title>和 Flashcards — Belajar Bahasa Jepang N5 (Bab 6 & 7 Minna no Nihongo)</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
 <style>
@@ -296,7 +296,6 @@
   .face-mid{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; padding:2px 0; min-height:0; }
   .kana-word{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:22px; font-weight:700; color:var(--ink); line-height:1.2; }
   .kana-romaji{ font-family:'Poppins',sans-serif; font-size:11.5px; font-weight:500; color:var(--ink-faint); margin-top:1px; }
-  .kanji-display{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:46px; font-weight:900; color:var(--ink); line-height:1; }
 
   .face-bottom{ display:flex; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
   .flip-hint{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; color:var(--ink-faint); display:flex; align-items:center; gap:4px; }
@@ -357,6 +356,10 @@
   }
 
   /* ============ BUNPOU CARDS & TABS ============ */
+  .bunpou-tab-bar{ display:flex; gap:6px; margin-bottom:12px; overflow-x:auto; padding-bottom:3px; }
+  .bunpou-tab{ flex:1; padding:8px 10px; border-radius:12px; background:var(--card-bg); border:1px solid var(--card-border); font-family:'Noto Sans JP',sans-serif; font-size:11.5px; font-weight:700; color:var(--ink-soft); cursor:pointer; transition:var(--transition); white-space:nowrap; text-align:center; }
+  .bunpou-tab.active{ background:linear-gradient(135deg, var(--accent-indigo), var(--accent-sakura-deep)); color:#fff; border-color:transparent; }
+
   .bunpou-card{ padding:16px; margin-bottom:12px; display:flex; flex-direction:column; gap:10px; }
   .bunpou-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
   .bunpou-title{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:16px; font-weight:900; color:var(--ink); line-height:1.25; margin-top:2px; }
@@ -549,16 +552,15 @@ const ICONS = {
 };
 function icon(name){ return ICONS[name] || ''; }
 
-/* ============ DATA MINNA NO NIHONGO BAB 6 ============ */
+/* ============ DATA MINNA NO NIHONGO BAB 6 & 7 ============ */
 function v(kana, arti, romaji){ return { type:'vocab', kana, arti, romaji }; }
-function k(kanji, words){ return { type:'kanji', kanji, words }; }
 
 const CHAPTERS = [
   {
     id: 'bab6',
     number: '6',
     title: 'Aktivitas Harian, Makanan & Minuman',
-    desc: '51 Kosakata Minna no Nihongo Bab 6 (Kata Kerja, Makanan, Minuman, Benda, Tempat & Ungkapan)',
+    desc: '51 Kosakata: Kata Kerja, Makanan, Minuman, Benda, Tempat & Ungkapan',
     icon: 'scale', accent: 'accent-indigo',
     groups: [
       {
@@ -657,6 +659,105 @@ const CHAPTERS = [
         ]
       }
     ]
+  },
+  {
+    id: 'bab7',
+    number: '7',
+    title: 'Alat, Sarana, Pemberian & Penerimaan',
+    desc: '46 Kosakata: Kata Kerja (Memberi/Menerima), Alat, Komunikasi, Keluarga & Ungkapan',
+    icon: 'swap', accent: 'accent-sakura',
+    groups: [
+      {
+        id: 'b7_g1',
+        title: 'Tabel Kotoba: Kata Kerja (どうし)',
+        desc: '9 Kosakata memotong, memberi, menerima, meminjam, dsb.',
+        page: 'Bab 7',
+        kategori: 'Kata Kerja',
+        icon: 'scale',
+        accent: 'accent-indigo',
+        cards: [
+          v('きります', 'memotong, menggunting', 'kirimasu'),
+          v('おくります', 'mengirim', 'okurimasu'),
+          v('あげます', 'memberikan', 'agemasu'),
+          v('もらいます', 'mendapatkan, menerima', 'moraimasu'),
+          v('かします', 'meminjamkan, menyewakan', 'kashimasu'),
+          v('かります', 'meminjam, menyewa', 'karimasu'),
+          v('おしえます', 'mengajar', 'oshiemasu'),
+          v('ならいます', 'belajar', 'naraimasu'),
+          v('かけます［でんわを～］', 'menelepon', 'kakemasu [denwa o ~]')
+        ]
+      },
+      {
+        id: 'b7_g2',
+        title: 'Tabel Kotoba: Alat, Komunikasi & Surat',
+        desc: '15 Kosakata alat tulis, makan, komputer, HP & pos',
+        page: 'Bab 7',
+        kategori: 'Alat & Komunikasi',
+        icon: 'target',
+        accent: 'accent-gold',
+        cards: [
+          v('て', 'tangan', 'te'),
+          v('はし', 'sumpit', 'hashi'),
+          v('スプーン', 'sendok', 'supuun'),
+          v('ナイフ', 'pisau', 'naifu'),
+          v('フォーク', 'garpu', 'fooku'),
+          v('はさみ', 'gunting', 'hasami'),
+          v('パソコン', 'komputer, PC', 'pasokon'),
+          v('ケータイ', 'HP', 'keetai'),
+          v('メール', 'e-mail', 'meeru'),
+          v('ねんがじょう', 'kartu tahun baru', 'nengajou'),
+          v('パンチ', 'pelubang kertas', 'panchi'),
+          v('ホッチキス', 'staplar', 'hotchikisu'),
+          v('セロテープ', 'selotip', 'seroteepu'),
+          v('けしゴム', 'penghapus karet', 'keshigomu'),
+          v('かみ', 'kertas', 'kami')
+        ]
+      },
+      {
+        id: 'b7_g3',
+        title: 'Tabel Kotoba: Benda, Hadiah & Keluarga',
+        desc: '11 Kosakata hadiah, uang, karcis, ayah, ibu, dsb.',
+        page: 'Bab 7',
+        kategori: 'Benda & Keluarga',
+        icon: 'flame',
+        accent: 'accent-indigo',
+        cards: [
+          v('はな', 'bunga', 'hana'),
+          v('シャツ', 'kemeja', 'shatsu'),
+          v('プレゼント', 'kado, hadiah', 'purezento'),
+          v('にもつ', 'barang', 'nimotsu'),
+          v('おかね', 'uang', 'okane'),
+          v('きっぷ', 'karcis', 'kippu'),
+          v('クリスマス', 'Natal', 'Kurisumasu'),
+          v('ちち', 'bapak, ayah', 'chichi'),
+          v('はは', 'ibu', 'haha'),
+          v('おとうさん', 'bapak, ayah (orang lain / panggilan)', 'otousan'),
+          v('おかあさん', 'ibu (orang lain / panggilan)', 'okaasan')
+        ]
+      },
+      {
+        id: 'b7_g4',
+        title: 'Tabel Kotoba: Keterangan & Percakapan',
+        desc: '11 Kosakata waktu, ungkapan bertamu & makan',
+        page: 'Bab 7',
+        kategori: 'Keterangan & Ungkapan',
+        icon: 'clipboard',
+        accent: 'accent-sakura',
+        cards: [
+          v('もう', 'sudah', 'mou'),
+          v('まだ', 'belum', 'mada'),
+          v('これから', 'mulai dari sekarang', 'korekara'),
+          v('［～、］すてきですね。', '［～］ bagus ya./［～］ indah ya.', '[~,] suteki desu ne'),
+          v('いらっしゃい。', 'Selamat datang.', 'irasshai'),
+          v('どうぞ おあがり ください。', 'Silakan masuk.', 'douzo oagari kudasai'),
+          v('しつれいします。', 'Permisi.', 'shitsureishimasu'),
+          v('［～は］いかがですか。', 'Bagaimana ［～］?', '[~ wa] ikaga desu ka'),
+          v('いただきます。', 'Selamat makan!', 'itadakimasu'),
+          v('ごちそうさま［でした］。', 'Terima kasih atas hidangannya.', 'gochisousama [deshita]'),
+          v('スペイン', 'Spanyol', 'Supein')
+        ]
+      }
+    ]
   }
 ];
 
@@ -665,8 +766,8 @@ const CHAPTERS = [
    ============================================================ */
 const STORE = { 
   theme:'waFlashcards.theme', 
-  learned:'waFlashcards.learnedIds_n5_b6', 
-  excluded:'waFlashcards.excludedIds_n5_b6', 
+  learned:'waFlashcards.learnedIds_n5_b67_v3', 
+  excluded:'waFlashcards.excludedIds_n5_b67_v3', 
   streak:'waFlashcards.streakCount', 
   lastVisit:'waFlashcards.lastVisit',
   reverseMode:'waFlashcards.reverseMode',
@@ -725,33 +826,14 @@ function shuffleArray(arr){
   return a;
 }
 
-function collectPool(chapterIds, kanjiOnly, targetGroupId){
+function collectPool(chapterIds, targetGroupId){
   let pool = [];
   chapterIds.forEach(cid => {
     const chap = CHAPTERS.find(c => c.id === cid);
     if (!chap) return;
     chap.groups.forEach(g => {
       if(targetGroupId && g.id !== targetGroupId) return;
-      const isKanji = g.id.endsWith('gk') || g.cards.some(c => c.type === 'kanji');
-      if(kanjiOnly && !isKanji) return;
-      if(!kanjiOnly && isKanji) return;
-
-      if(isKanji){
-        g.cards.forEach(card => {
-          if(card.words){
-            card.words.forEach((w, wIdx) => {
-              pool.push({
-                card: { type: 'kanji_item', kanji: w.kanjiText, kana: w.kana, arti: w.id, romaji: w.romaji, parentKanji: card.kanji },
-                groupId: g.id,
-                chapterId: cid,
-                uniqueId: `${g.id}_${card.kanji}_${wIdx}`
-              });
-            });
-          }
-        });
-      } else {
-        g.cards.forEach((card, idx) => pool.push({ card, groupId: g.id, chapterId: cid, uniqueId: `${g.id}_${idx}` }));
-      }
+      g.cards.forEach((card, idx) => pool.push({ card, groupId: g.id, chapterId: cid, uniqueId: `${g.id}_${idx}` }));
     });
   });
   return pool;
@@ -764,81 +846,71 @@ function pickDistractors(pool, target, count){
 }
 
 const SCOPES = {
-  all_b6: { 
-    label: 'Semua Kosakata Bab 6 (51)', 
-    desc: 'Lengkap 51 kosakata Minna no Nihongo Bab 6', 
+  all_b67: { 
+    label: 'Semua Kosakata (Bab 6 & 7)', 
+    desc: 'Lengkap 97 kosakata Minna no Nihongo Bab 6 & 7', 
     icon: 'layers', 
     accent: 'accent-gold', 
-    build: () => collectPool(['bab6'], false) 
+    build: () => collectPool(['bab6','bab7']) 
   },
-  verbs_b6: { 
-    label: 'Kata Kerja Bab 6 (11)', 
-    desc: 'たべます、のみます、みます、ききます、dll.', 
+  bab6: { 
+    label: 'Bab 6: Lengkap (51)', 
+    desc: 'Aktivitas harian, makanan, minuman & ungkapan', 
     icon: 'scale', 
     accent: 'accent-indigo', 
-    build: () => collectPool(['bab6'], false, 'b6_g1') 
+    build: () => collectPool(['bab6']) 
   },
-  food_b6: { 
-    label: 'Makanan & Minuman (18)', 
-    desc: 'ごはん、パン、たまご、にく、おちゃ、dll.', 
+  bab7: { 
+    label: 'Bab 7: Lengkap (46)', 
+    desc: 'Alat, sarana, memberi/menerima & bertamu', 
+    icon: 'swap', 
+    accent: 'accent-sakura', 
+    build: () => collectPool(['bab7']) 
+  },
+  verbs_all: { 
+    label: 'Semua Kata Kerja (20)', 
+    desc: 'Gabungan 20 kata kerja dari Bab 6 & 7', 
+    icon: 'target', 
+    accent: 'accent-gold', 
+    build: () => [...collectPool(['bab6'], 'b6_g1'), ...collectPool(['bab7'], 'b7_g1')]
+  },
+  tools_b7: { 
+    label: 'Bab 7: Alat & Komunikasi (15)', 
+    desc: 'Alat tulis, sendok, sumpit, HP, komputer, surat, dsb.', 
+    icon: 'clipboard', 
+    accent: 'accent-indigo', 
+    build: () => collectPool(['bab7'], 'b7_g2') 
+  },
+  phrase_b7: { 
+    label: 'Bab 7: Keterangan & Percakapan (11)', 
+    desc: 'もう、まだ、いらっしゃい、いただきます、dsb.', 
     icon: 'flame', 
     accent: 'accent-sakura', 
-    build: () => collectPool(['bab6'], false, 'b6_g2') 
-  },
-  obj_b6: { 
-    label: 'Benda, Tempat & Kegiatan (10)', 
-    desc: 'てがみ、しゃしん、みせ、テニス、おはなみ、dll.', 
-    icon: 'target', 
-    accent: 'accent-indigo', 
-    build: () => collectPool(['bab6'], false, 'b6_g3') 
-  },
-  phrase_b6: { 
-    label: 'Keterangan & Percakapan (12)', 
-    desc: 'なに、いっしょに、いつも、いいですね、dll.', 
-    icon: 'clipboard', 
-    accent: 'accent-sakura', 
-    build: () => collectPool(['bab6'], false, 'b6_g4') 
+    build: () => collectPool(['bab7'], 'b7_g4') 
   }
 };
-const SCOPE_KEYS = ['all_b6', 'verbs_b6', 'food_b6', 'obj_b6', 'phrase_b6'];
+const SCOPE_KEYS = ['all_b67', 'bab6', 'bab7', 'verbs_all', 'tools_b7', 'phrase_b7'];
 
 function buildMCQuestions(scopeKey){
   const pool = SCOPES[scopeKey].build();
   let qs = [];
-  const isKanjiQuiz = scopeKey.startsWith('kanji');
 
   pool.forEach(item => {
-    if(isKanjiQuiz){
+    ['jp2id','id2jp'].forEach(dir => {
       const distractors = pickDistractors(pool, item, 3);
       const options = shuffleArray([item, ...distractors]).map(o => {
-        return { text: o.card.kana, sub: null, correct: o.uniqueId === item.uniqueId };
+        return { 
+          text: dir==='jp2id' ? o.card.arti : o.card.kana, 
+          sub: dir==='id2jp' ? o.card.romaji : null, 
+          correct: o.uniqueId === item.uniqueId 
+        };
       });
       qs.push({
-        isKanji: true,
-        item, options,
-        promptMain: item.card.kanji,
-        promptSub: null,
-        kanjiGlyph: null
+        direction: dir, item, options,
+        promptMain: dir==='jp2id' ? item.card.kana : item.card.arti,
+        promptSub: dir==='jp2id' ? item.card.romaji : null
       });
-    } else {
-      ['jp2id','id2jp'].forEach(dir => {
-        const distractors = pickDistractors(pool, item, 3);
-        const options = shuffleArray([item, ...distractors]).map(o => {
-          return { 
-            text: dir==='jp2id' ? o.card.arti : o.card.kana, 
-            sub: dir==='id2jp' ? o.card.romaji : null, 
-            correct: o.uniqueId === item.uniqueId 
-          };
-        });
-        qs.push({
-          isKanji: false,
-          direction: dir, item, options,
-          promptMain: dir==='jp2id' ? item.card.kana : item.card.arti,
-          promptSub: dir==='jp2id' ? item.card.romaji : null,
-          kanjiGlyph: null
-        });
-      });
-    }
+    });
   });
   return shuffleArray(qs);
 }
@@ -875,11 +947,7 @@ function playCurrentCardTTS(){
   if (!g || !state.order) return;
   const card = g.cards[state.order[state.cardIndex]];
   if (card) {
-    if(card.type === 'kanji'){
-      speakKana(card.words.map(w => w.jp).join('、'));
-    } else {
-      speakKana(card.kana);
-    }
+    speakKana(card.kana);
   }
 }
 
@@ -979,11 +1047,11 @@ function renderHome(){
         <span class="glow"></span>
         <span class="emblem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('scroll')}</svg></span>
         <span class="eyebrow">BUNPOU · TATA BAHASA</span>
-        <div class="bab-title">Pola Kalimat Bab 6</div>
-        <div class="bab-desc">8 pola tata bahasa lengkap: Objek を, Kegiatan を します, なにを しますか, Perbedaan なん &amp; なに, Tempat で, Ajakan ませんか &amp; ましょう, serta Konfirmasi ～か.</div>
+        <div class="bab-title">Pola Kalimat Bab 6 &amp; 7</div>
+        <div class="bab-desc">14 Pola tatabahasa lengkap (8 pola Bab 6 + 6 pola Bab 7) berserta rumus pill dan percakapan (Kaiwa).</div>
         <div class="bab-meta">
-          <div><div class="meta-num">8 Pola</div><div class="meta-label">Materi Lengkap</div></div>
-          <div><div class="meta-num">Hiragana</div><div class="meta-label">Mudah Dibaca</div></div>
+          <div><div class="meta-num">2 Bab</div><div class="meta-label">Bab 6 &amp; 7</div></div>
+          <div><div class="meta-num">14 Pola</div><div class="meta-label">Rumus Lengkap</div></div>
           <div><div class="meta-num">+Kaiwa</div><div class="meta-label">Percakapan</div></div>
         </div>
       </button>
@@ -997,9 +1065,9 @@ function renderHome(){
         <span class="emblem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('clipboard')}</svg></span>
         <span class="eyebrow">UJI PEMAHAMAN</span>
         <div class="bab-title">Mulai Latihan Soal</div>
-        <div class="bab-desc">Pilihan ganda &amp; pasangan kata untuk menguji hafalan kosakata dan arti Bab 6 Minna no Nihongo.</div>
+        <div class="bab-desc">Pilihan ganda &amp; pasangan kata untuk menguji hafalan kosakata dan arti Bab 6 &amp; Bab 7.</div>
         <div class="bab-meta">
-          <div><div class="meta-num">5</div><div class="meta-label">Cakupan Soal</div></div>
+          <div><div class="meta-num">6</div><div class="meta-label">Cakupan Soal</div></div>
           <div><div class="meta-num">2</div><div class="meta-label">Metode Kuis</div></div>
         </div>
       </button>
@@ -1054,61 +1122,6 @@ function renderChapter(cid){
    RENDER: DECK (FLASHCARD)
    ============================================================ */
 function renderCardFace(card, kat, pageStr){
-  if(card.type === 'kanji'){
-    const wordsHtml = card.words.map(w => `
-      <div class="kanji-word-item">
-        <span class="kanji-word-jp">${w.jp}</span>
-        <span class="kanji-word-id">${w.id}</span>
-      </div>
-    `).join('');
-
-    const wordsMeaningStr = card.words.map(w => w.id).join(' / ');
-
-    if(state.reverseMode){
-      const front = `
-        <div class="face-top">
-          <div class="face-top-left"><span class="badge sakura">Arti Kanji · ${pageStr}</span><span class="learned-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span></div>
-          <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
-        </div>
-        <div class="face-mid" style="text-align:center;">
-          <span class="arti-label">Makna / Kosakata Terkait</span>
-          <span class="arti-text" style="font-size:15px;margin-top:4px;">${wordsMeaningStr}</span>
-        </div>
-        <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk melihat kanji &amp; cara baca</span></div>`;
-
-      const back = `
-        <div class="face-top">
-          <span class="badge blue">Kanji ${card.kanji} · ${pageStr}</span>
-          <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
-        </div>
-        <div class="face-mid" style="text-align:left;padding:0 2px;width:100%;">
-          <div class="kanji-word-list">${wordsHtml}</div>
-        </div>
-        <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk kembali</span></div>`;
-      return { front, back };
-    }
-
-    const front = `
-      <div class="face-top">
-        <div class="face-top-left"><span class="badge sakura">Kanji Harian · ${pageStr}</span><span class="learned-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span></div>
-        <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
-      </div>
-      <div class="face-mid"><span class="kanji-display">${card.kanji}</span></div>
-      <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk melihat contoh &amp; arti</span></div>`;
-
-    const back = `
-      <div class="face-top">
-        <span class="badge blue">Kanji ${card.kanji} · ${pageStr}</span>
-        <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
-      </div>
-      <div class="face-mid" style="text-align:left;padding:0 2px;width:100%;">
-        <div class="kanji-word-list">${wordsHtml}</div>
-      </div>
-      <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk kembali</span></div>`;
-    return { front, back };
-  }
-
-  // Vocab card
   const romajiHtml = card.romaji ? `<span class="kana-romaji">${card.romaji}</span>` : '';
 
   if(state.reverseMode){
@@ -1238,20 +1251,15 @@ function renderDeck(cid, gid){
 }
 
 /* ============================================================
-   RENDER: BUNPOU VIEWER (8 POLA TATA BAHASA LENGKAP BAB 6)
+   RENDER: BUNPOU VIEWER (BAB 6 & BAB 7 LENGKAP)
    ============================================================ */
 function renderBunpou(){
-  screenEl.innerHTML = `
-    <div class="screen-inner">
-      <div class="back-row">
-        <button class="back-btn" id="backHome"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
-        <div class="crumb">
-          <span class="eyebrow">TATA BAHASA (BUNPOU)</span>
-          <span class="crumb-title">Modul Lengkap Bab 6</span>
-        </div>
-      </div>
+  const tab = state.bunpouTab;
+  let contentHtml = '';
 
-      <!-- POLA 1 -->
+  if(tab === 'b6'){
+    contentHtml = `
+      <!-- BAB 6 - POLA 1 -->
       <div class="bento bunpou-card accent-indigo">
         <div class="bunpou-header">
           <div><span class="eyebrow">POLA 01 · BAB 6</span><div class="bunpou-title">1. Objek Langsung: Kata Benda を Kata Kerja</div></div>
@@ -1286,7 +1294,7 @@ function renderBunpou(){
         </div>
       </div>
 
-      <!-- POLA 2 -->
+      <!-- BAB 6 - POLA 2 -->
       <div class="bento bunpou-card accent-gold">
         <div class="bunpou-header">
           <div><span class="eyebrow">POLA 02 · BAB 6</span><div class="bunpou-title">2. Melakukan Kegiatan: Kata Benda を します</div></div>
@@ -1320,15 +1328,10 @@ function renderBunpou(){
             <span class="jp-romaji">Shukudai o shimasu.</span>
             <span class="jp-arti">Mengerjakan PR.</span>
           </div>
-          <div class="example">
-            <span class="jp-ex">パーティーを します。</span>
-            <span class="jp-romaji">Paatii o shimasu.</span>
-            <span class="jp-arti">Mengadakan pesta.</span>
-          </div>
         </div>
       </div>
 
-      <!-- POLA 3 -->
+      <!-- BAB 6 - POLA 3 -->
       <div class="bento bunpou-card accent-sakura">
         <div class="bunpou-header">
           <div><span class="eyebrow">POLA 03 · BAB 6</span><div class="bunpou-title">3. Menanyakan Kegiatan: なにを しますか</div></div>
@@ -1337,7 +1340,7 @@ function renderBunpou(){
         <div class="formula-container">
           <div class="formula-row">
             <span class="formula-pill blue">[Waktu]</span>
-            <span class="formula-pill gold">なにを しますか (Sekarang / Nanti)</span>
+            <span class="formula-pill gold">なにを しますか (Sekarang/Nanti)</span>
             <span class="formula-op">/</span>
             <span class="formula-pill sakura">なにを しましたか (Lampau)</span>
           </div>
@@ -1357,7 +1360,7 @@ function renderBunpou(){
         </div>
       </div>
 
-      <!-- POLA 4 -->
+      <!-- BAB 6 - POLA 4 -->
       <div class="bento bunpou-card accent-indigo">
         <div class="bunpou-header">
           <div><span class="eyebrow">POLA 04 · BAB 6</span><div class="bunpou-title">4. Perbedaan なん (nan) dan なに (nani)</div></div>
@@ -1374,9 +1377,9 @@ function renderBunpou(){
           </div>
         </div>
         <div class="bunpou-desc">
-          Keduanya berarti "apa", tetapi penggunaannya dibedakan berdasarkan kata setelahnya:
+          Keduanya berarti "apa", perbedaannya:
           <ul>
-            <li><strong>Gunakan なん:</strong> Di depan bunyi baris <em>ta, da, na</em> (seperti <em>です</em>, <em>の</em>), diikuti kata bantu bilangan (umur, jam, dsb.), dan pada frasa <em>なんで</em> (sarana/alat atau alasan).</li>
+            <li><strong>Gunakan なん:</strong> Di depan bunyi baris <em>ta, da, na</em> (seperti <em>です</em>, <em>の</em>), diikuti satuan bilangan (umur, jam), atau pada frasa <em>なんで</em> (sarana transportasi/alasan).</li>
             <li><strong>Gunakan なに:</strong> Selain kondisi di atas (misalnya berdiri sendiri atau diikuti partikel <em>を</em>).</li>
           </ul>
         </div>
@@ -1387,21 +1390,6 @@ function renderBunpou(){
             <span class="jp-arti">Itu apa? (Diikuti です - baris だ)</span>
           </div>
           <div class="example">
-            <span class="jp-ex">なんの ほん ですか。</span>
-            <span class="jp-romaji">Nan no hon desu ka.</span>
-            <span class="jp-arti">Buku apa? (Diikuti の - baris な)</span>
-          </div>
-          <div class="example">
-            <span class="jp-ex">なんさい ですか。</span>
-            <span class="jp-romaji">Nansai desu ka.</span>
-            <span class="jp-arti">Umur berapa? (Diikuti kata bantu bilangan)</span>
-          </div>
-          <div class="example">
-            <span class="jp-ex">なんで とうきょうへ いきますか。</span>
-            <span class="jp-romaji">Nande Toukyou e ikimasu ka.</span>
-            <span class="jp-arti">Dengan apa pergi ke Tokyo? (Menanyakan sarana transportasi)</span>
-          </div>
-          <div class="example">
             <span class="jp-ex">なにを かいますか。</span>
             <span class="jp-romaji">Nani o kaimasu ka.</span>
             <span class="jp-arti">Mau membeli apa? (Diikuti partikel を)</span>
@@ -1409,10 +1397,10 @@ function renderBunpou(){
         </div>
       </div>
 
-      <!-- POLA 5 -->
+      <!-- BAB 6 - POLA 5 -->
       <div class="bento bunpou-card accent-gold">
         <div class="bunpou-header">
-          <div><span class="eyebrow">POLA 05 · BAB 6</span><div class="bunpou-title">5. Tempat Keterangan Aksi: Tempat で Kata Kerja</div></div>
+          <div><span class="eyebrow">POLA 05 · BAB 6</span><div class="bunpou-title">5. Tempat Aksi: Tempat で Kata Kerja</div></div>
           <span class="badge">Lokasi Aksi</span>
         </div>
         <div class="formula-container">
@@ -1436,51 +1424,41 @@ function renderBunpou(){
             <span class="jp-romaji">Resutoran de gohan o tabemasu.</span>
             <span class="jp-arti">Makan nasi di restoran.</span>
           </div>
-          <div class="example">
-            <span class="jp-ex">にわで しゃしんを とります。</span>
-            <span class="jp-romaji">Niwa de shashin o torimasu.</span>
-            <span class="jp-arti">Mengambil foto di halaman.</span>
-          </div>
         </div>
       </div>
 
-      <!-- POLA 6 -->
+      <!-- BAB 6 - POLA 6 -->
       <div class="bento bunpou-card accent-sakura">
         <div class="bunpou-header">
-          <div><span class="eyebrow">POLA 06 · BAB 6</span><div class="bunpou-title">6. Ajakan Halus / Menawari: Kata Kerja ませんか</div></div>
+          <div><span class="eyebrow">POLA 06 · BAB 6</span><div class="bunpou-title">6. Ajakan Halus: Kata Kerja ませんか</div></div>
           <span class="badge sakura">Ajakan Sopan</span>
         </div>
         <div class="formula-container">
           <div class="formula-row">
-            <span class="formula-pill gold">Kata Kerja (Bentuk ます - buang ます)</span>
+            <span class="formula-pill gold">Kata Kerja (Hilangkan ます)</span>
             <span class="formula-op">+</span>
             <span class="formula-pill sakura">ませんか</span>
           </div>
         </div>
-        <div class="bunpou-desc">Digunakan untuk mengundang atau mengajak lawan bicara secara sopan ("Bagaimana kalau...? / Maukah...?"). Memberikan ruang bagi lawan bicara untuk menolak secara halus.</div>
+        <div class="bunpou-desc">Digunakan untuk mengajak lawan bicara secara sopan ("Bagaimana kalau...? / Maukah...?"). Memberikan ruang untuk menolak secara halus.</div>
         <div class="bunpou-examples">
           <div class="example">
             <span class="jp-ex">いっしょに きょうとへ いきませんか。……ええ、いいですね。</span>
             <span class="jp-romaji">Isshoni Kyouto e ikimasen ka. ...Ee, ii desu ne.</span>
             <span class="jp-arti">Bagaimana kalau kita pergi ke Kyoto bersama-sama? ...Ya, bagus ya.</span>
           </div>
-          <div class="example">
-            <span class="jp-ex">いっしょに ひるごはんを たべませんか。</span>
-            <span class="jp-romaji">Isshoni hirugohan o tabemasen ka.</span>
-            <span class="jp-arti">Maukah makan siang bersama?</span>
-          </div>
         </div>
       </div>
 
-      <!-- POLA 7 -->
+      <!-- BAB 6 - POLA 7 -->
       <div class="bento bunpou-card accent-indigo">
         <div class="bunpou-header">
-          <div><span class="eyebrow">POLA 07 · BAB 6</span><div class="bunpou-title">7. Ajakan Aktif / Menanggapi: Kata Kerja ましょう</div></div>
+          <div><span class="eyebrow">POLA 07 · BAB 6</span><div class="bunpou-title">7. Ajakan Aktif: Kata Kerja ましょう</div></div>
           <span class="badge blue">Ajakan Aktif</span>
         </div>
         <div class="formula-container">
           <div class="formula-row">
-            <span class="formula-pill gold">Kata Kerja (Bentuk ます - buang ます)</span>
+            <span class="formula-pill gold">Kata Kerja (Hilangkan ます)</span>
             <span class="formula-op">+</span>
             <span class="formula-pill blue">ましょう</span>
           </div>
@@ -1500,7 +1478,7 @@ function renderBunpou(){
         </div>
       </div>
 
-      <!-- POLA 8 -->
+      <!-- BAB 6 - POLA 8 -->
       <div class="bento bunpou-card accent-gold">
         <div class="bunpou-header">
           <div><span class="eyebrow">POLA 08 · BAB 6</span><div class="bunpou-title">8. Konfirmasi Informasi Baru: ～か</div></div>
@@ -1513,17 +1491,12 @@ function renderBunpou(){
             <span class="formula-pill gold">ですか / か</span>
           </div>
         </div>
-        <div class="bunpou-desc">Partikel <strong>か</strong> di akhir kalimat tanggapan digunakan ketika mengulangi informasi baru yang baru saja didengar untuk mengonfirmasi dan memahaminya.</div>
+        <div class="bunpou-desc">Partikel <strong>か</strong> di akhir kalimat tanggapan digunakan ketika mengulangi informasi baru yang baru didengar untuk mengonfirmasi dan memahaminya.</div>
         <div class="bunpou-examples">
           <div class="example">
             <span class="jp-ex">にちようび きょうとへ いきました。……きょうとですか。いいですね。</span>
             <span class="jp-romaji">Nichiyoubi Kyouto e ikimashita. ...Kyouto desu ka. Ii desu ne.</span>
             <span class="jp-arti">Hari Minggu lalu saya pergi ke Kyoto. ...Ke Kyoto? Bagus ya.</span>
-          </div>
-          <div class="example">
-            <span class="jp-ex">あしたは ともだちと テニスを します。……テニスですか。</span>
-            <span class="jp-romaji">Ashita wa tomodachi to tenisu o shimasu. ...Tenisu desu ka.</span>
-            <span class="jp-arti">Besok saya bermain tenis dengan teman. ...Tenis ya?</span>
           </div>
         </div>
       </div>
@@ -1535,7 +1508,233 @@ function renderBunpou(){
         <div class="kaiwa-item"><div class="kaiwa-speaker">ミラー:</div><div class="kaiwa-body"><div class="kaiwa-jp">いいですね。どこへ いきますか。</div><div class="kaiwa-romaji">Ii desu ne. Doko e ikimasu ka.</div><div class="kaiwa-id">Bagus ya / ide yang menyenangkan. Mau pergi ke mana?</div></div></div>
         <div class="kaiwa-item"><div class="kaiwa-speaker">サトウ:</div><div class="kaiwa-body"><div class="kaiwa-jp">おおさかじょうこうえんへ いきましょう。じゅういちじに えきで あいましょう。</div><div class="kaiwa-romaji">Oosakajou kouen e ikimashou. Juuichi-ji ni eki de aimashou.</div><div class="kaiwa-id">Ayo pergi ke Taman Kastil Osaka. Mari bertemu di stasiun jam 11.</div></div></div>
         <div class="kaiwa-item"><div class="kaiwa-speaker">ミラー:</div><div class="kaiwa-body"><div class="kaiwa-jp">わかりました。じゃ、また あした。</div><div class="kaiwa-romaji">Wakarimashita. Jaa, mata ashita.</div><div class="kaiwa-id">Baiklah, mengerti. Sampai jumpa besok.</div></div></div>
+      </div>`;
+  } else if(tab === 'b7'){
+    contentHtml = `
+      <!-- BAB 7 - POLA 1 -->
+      <div class="bento bunpou-card accent-indigo">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 01 · BAB 7</span><div class="bunpou-title">1. Alat, Sarana, &amp; Bahasa: KB で KK</div></div>
+          <span class="badge blue">Sarana / Alat</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Kata Benda (Alat/Bahasa)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill sakura">で (de)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill blue">Kata Kerja</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Partikel <strong>で (de)</strong> digunakan untuk menunjukkan sarana, alat, atau bahasa yang dipakai untuk melakukan suatu kegiatan.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">はしで たべます。</span>
+            <span class="jp-romaji">Hashi de tabemasu.</span>
+            <span class="jp-arti">Makan dengan sumpit.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">にほんごで レポートを かきます。</span>
+            <span class="jp-romaji">Nihongo de repooto o kakimasu.</span>
+            <span class="jp-arti">Menulis laporan dalam bahasa Jepang.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">はさみで かみを きります。</span>
+            <span class="jp-romaji">Hasami de kami o kirimasu.</span>
+            <span class="jp-arti">Memotong kertas dengan gunting.</span>
+          </div>
+        </div>
       </div>
+
+      <!-- BAB 7 - POLA 2 -->
+      <div class="bento bunpou-card accent-gold">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 02 · BAB 7</span><div class="bunpou-title">2. Istilah Bahasa Lain: 「Kata」は ～ごで なんですか</div></div>
+          <span class="badge">Tanya Bahasa</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill blue">「Kata / Kalimat」</span>
+            <span class="formula-pill gold">は</span>
+            <span class="formula-pill sakura">[Bahasa]ごで なんですか</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Pola ini digunakan untuk menanyakan bagaimana cara mengucapkan suatu kata atau kalimat dalam bahasa lain.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">「ありがとう」は えいごで なんですか。……「Thank you」です。</span>
+            <span class="jp-romaji">"Arigatou" wa eigo de nan desu ka. ..."Thank you" desu.</span>
+            <span class="jp-arti">Apa bahasa Inggrisnya "Arigato"? ... "Thank you".</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">「Thank you」は にほんごで なんですか。……「ありがとう」です。</span>
+            <span class="jp-romaji">"Thank you" wa nihongo de nan desu ka. ..."Arigatou" desu.</span>
+            <span class="jp-arti">Apa bahasa Jepang dari "Thank you"? ... "Arigato".</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAB 7 - POLA 3 -->
+      <div class="bento bunpou-card accent-sakura">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 03 · BAB 7</span><div class="bunpou-title">3. Memberi: KB (orang) に KB を あげます / かします / おしえます</div></div>
+          <span class="badge sakura">Memberikan</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Penerima</span>
+            <span class="formula-pill sakura">に (ni)</span>
+            <span class="formula-pill blue">Barang を</span>
+            <span class="formula-pill gold">あげます / かします / おしえます</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Kata kerja seperti <strong>あげます</strong> (memberi), <strong>かします</strong> (meminjamkan), dan <strong>おしえます</strong> (mengajar) memerlukan penerima. Orang yang menerima ditandai partikel <strong>に (ni)</strong>.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">きむらさんに はなを あげました。</span>
+            <span class="jp-romaji">Kimura-san ni hana o agemashita.</span>
+            <span class="jp-arti">Saya memberikan bunga kepada Sdr. Kimura.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">いーさんに ほんを かしました。</span>
+            <span class="jp-romaji">Ii-san ni hon o kashimashita.</span>
+            <span class="jp-arti">Saya meminjamkan buku kepada Sdr. Lee.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">やまださんに えいごを おしえます。</span>
+            <span class="jp-romaji">Yamada-san ni eigo o oshiemasu.</span>
+            <span class="jp-arti">Saya mengajar bahasa Inggris kepada Sdr. Yamada.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAB 7 - POLA 4 -->
+      <div class="bento bunpou-card accent-indigo">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 04 · BAB 7</span><div class="bunpou-title">4. Menerima: KB (orang/lembaga) に / から KB を もらいます / かります / ならいます</div></div>
+          <span class="badge blue">Menerima</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Pemberi</span>
+            <span class="formula-pill sakura">に / から</span>
+            <span class="formula-pill blue">Barang を</span>
+            <span class="formula-pill gold">もらいます / かります / ならいます</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Menunjukkan tindakan menerima dari orang lain. Orang yang memberi ditandai partikel <strong>に (ni)</strong> atau <strong>から (kara)</strong>. Jika pemberi berupa organisasi (bank, sekolah), gunakan <strong>から</strong>.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">やまださんに はなを もらいました。</span>
+            <span class="jp-romaji">Yamada-san ni hana o moraimashita.</span>
+            <span class="jp-arti">Saya menerima bunga dari Sdr. Yamada.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">ぎんこうから おかねを かりました。</span>
+            <span class="jp-romaji">Ginkou kara okane o karimashita.</span>
+            <span class="jp-arti">Saya meminjam uang dari bank.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">サントスさんに スペインごを ならいました。</span>
+            <span class="jp-romaji">Santosu-san ni Supein-go o naraimashita.</span>
+            <span class="jp-arti">Saya belajar bahasa Spanyol dari Sdr. Santos.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAB 7 - POLA 5 -->
+      <div class="bento bunpou-card accent-gold">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 05 · BAB 7</span><div class="bunpou-title">5. Menyatakan Sudah Selesai: もう KK ました</div></div>
+          <span class="badge">Sudah Selesai</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">もう</span>
+            <span class="formula-pill blue">Kata Kerja ましたか</span>
+          </div>
+          <div class="formula-row" style="margin-top:3px;">
+            <span class="formula-pill sakura">Sudah: はい、もう ～ました</span>
+            <span class="formula-pill sakura">Belum: いいえ、まだです</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">
+          <strong>もう (mou)</strong> berarti "sudah". Bila digabung bentuk lampau (<strong>ました</strong>), menyatakan perbuatan telah selesai.
+          <br><em>*Perhatian: Jika belum, jawablah dengan <strong>いいえ、まだです</strong> (jangan gunakan ~ませんでした).</em>
+        </div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">もう にもつを おくりましたか。</span>
+            <span class="jp-romaji">Mou nimotsu o okurimashita ka.</span>
+            <span class="jp-arti">Apakah barang sudah dikirim?</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">……はい、もう おくりました。</span>
+            <span class="jp-romaji">...Hai, mou okurimashita.</span>
+            <span class="jp-arti">...Ya, sudah dikirim.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">……いいえ、まだです。</span>
+            <span class="jp-romaji">...Iie, mada desu.</span>
+            <span class="jp-arti">...Belum.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- BAB 7 - POLA 6 -->
+      <div class="bento bunpou-card accent-sakura">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 06 · BAB 7</span><div class="bunpou-title">6. Menghilangkan Partikel dalam Percakapan</div></div>
+          <span class="badge sakura">Percakapan Kasual</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">KB [Partikel dihilangkan]</span>
+            <span class="formula-pill blue">Ungkapan / Tanggapan</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Dalam percakapan sehari-hari yang santai atau konteksnya sudah saling dipahami, partikel seperti <em>は</em> atau <em>を</em> sering dihilangkan.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">この スプーン［は］、すてきですね。</span>
+            <span class="jp-romaji">Kono supuun [wa], suteki desu ne.</span>
+            <span class="jp-arti">Sendok ini bagus ya.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">コーヒー［を］、もう いっぱい いかがですか。</span>
+            <span class="jp-romaji">Koohii [o], mou ippai ikaga desu ka.</span>
+            <span class="jp-arti">Bagaimana kopi secangkir lagi?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KAIWA BAB 7 -->
+      <div class="kaiwa-box">
+        <div class="kaiwa-title"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" style="width:15px;height:15px;stroke:var(--accent-indigo);">${icon('speaker')}</svg> かいわ (Percakapan Bab 7: いらっしゃい)</div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">ワン:</div><div class="kaiwa-body"><div class="kaiwa-jp">ごめんください。</div><div class="kaiwa-romaji">Gomen kudasai.</div><div class="kaiwa-id">Permisi / Ada orang di rumah?</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">やまだ:</div><div class="kaiwa-body"><div class="kaiwa-jp">いらっしゃい。どうぞ おあがり ください。</div><div class="kaiwa-romaji">Irasshai. Douzo oagari kudasai.</div><div class="kaiwa-id">Selamat datang. Silakan masuk.</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">ワン:</div><div class="kaiwa-body"><div class="kaiwa-jp">しつれいします。これ、おみやげです。どうぞ。</div><div class="kaiwa-romaji">Shitsureishimasu. Kore, omiyage desu. Douzo.</div><div class="kaiwa-id">Permisi. Ini oleh-oleh untuk Anda. Silakan.</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">やまだ:</div><div class="kaiwa-body"><div class="kaiwa-jp">すてきですね。ありがとう ございます。コーヒーは いかがですか。</div><div class="kaiwa-romaji">Suteki desu ne. Arigatou gozaimasu. Koohii wa ikaga desu ka.</div><div class="kaiwa-id">Bagus sekali ya. Terima kasih banyak. Mau minum kopi?</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">ワン:</div><div class="kaiwa-body"><div class="kaiwa-jp">いただきます。</div><div class="kaiwa-romaji">Itadakimasu.</div><div class="kaiwa-id">Terima kasih (selamat menikmati).</div></div></div>
+      </div>`;
+  }
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="back-row">
+        <button class="back-btn" id="backHome"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
+        <div class="crumb">
+          <span class="eyebrow">TATA BAHASA (BUNPOU)</span>
+          <span class="crumb-title">Modul Lengkap Bab 6 &amp; 7</span>
+        </div>
+      </div>
+
+      <div class="bunpou-tab-bar">
+        <button class="bunpou-tab ${tab==='b6'?'active':''}" data-set-btab="b6">Bab 6: Objek &amp; Ajakan</button>
+        <button class="bunpou-tab ${tab==='b7'?'active':''}" data-set-btab="b7">Bab 7: Alat, Pemberian &amp; Waktu</button>
+      </div>
+
+      ${contentHtml}
     </div>`;
 }
 
@@ -1568,7 +1767,7 @@ function renderTestHub(){
           <span class="crumb-title">Pilih Cakupan Soal</span>
         </div>
       </div>
-      <div class="section-label">5 Cakupan Latihan Soal Bab 6</div>
+      <div class="section-label">6 Cakupan Latihan Soal</div>
       ${rows}
     </div>`;
 }
@@ -1746,6 +1945,9 @@ screenEl.addEventListener('click', (e)=>{
   const openQuizMode = e.target.closest('[data-open-quiz-mode]');
   if(openQuizMode){ goQuizMode(openQuizMode.getAttribute('data-open-quiz-mode')); return; }
 
+  const setBTab = e.target.closest('[data-set-btab]');
+  if(setBTab){ state.bunpouTab = setBTab.getAttribute('data-set-btab'); renderBunpou(); return; }
+
   if(e.target.closest('#openBunpou')){ goBunpouViewer(); return; }
   if(e.target.closest('#openTestHub')){ goTestHub(); return; }
   if(e.target.closest('#backTestHub')){ goTestHub(); return; }
@@ -1854,7 +2056,7 @@ screenEl.addEventListener('click', (e)=>{
   }
 
   if(e.target.closest('#resetProgress')){
-    if(confirm('Setel ulang seluruh progres hafalan Bab 6?')){
+    if(confirm('Setel ulang seluruh progres hafalan Bab 6 & 7?')){
       Object.values(STORE).forEach(k => localStorage.removeItem(k));
       location.reload();
     }
@@ -1885,11 +2087,7 @@ screenEl.addEventListener('click', (e)=>{
       if (g) {
         const card = g.cards[state.order[state.cardIndex]];
         if (card) {
-          if(card.type === 'kanji'){
-            speakKana(card.words.map(w => w.jp).join('、'));
-          } else {
-            speakKana(card.kana);
-          }
+          speakKana(card.kana);
         }
       }
     }
