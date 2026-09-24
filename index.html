@@ -1,0 +1,1977 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, viewport-fit=cover">
+<title>和 Flashcards — Belajar Bahasa Jepang N5 (Bab 6 Minna no Nihongo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&family=Zen+Kaku+Gothic+New:wght@500;700;900&family=Poppins:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --radius-xl: 24px;
+    --radius-lg: 18px;
+    --radius-md: 14px;
+    --gap: 10px;
+    --ease: cubic-bezier(.22,.9,.3,1);
+  }
+  *{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+  html,body{ margin:0; padding:0; }
+  body{
+    min-height:100dvh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    background:#e8e2da;
+    font-family:'Poppins','Noto Sans JP',sans-serif;
+  }
+  button{ font:inherit; }
+
+  /* ============ FURIGANA STYLING ============ */
+  ruby { ruby-align: center; }
+  rt { font-size: 0.58em; font-family: 'Zen Kaku Gothic New', sans-serif; font-weight: 700; color: var(--accent-indigo); letter-spacing: 0; line-height: 1; }
+
+  /* ============ THEME TOKENS ============ */
+  .app{
+    --bg-sky-top: #ffe7ec;
+    --bg-sky-mid: #fff1ea;
+    --bg-sky-bot: #fdf7f0;
+    --ink: #2b241f;
+    --ink-soft: #7a6d64;
+    --ink-faint: #a89a90;
+    --card-bg: #ffffff;
+    --card-bg-soft: #fffaf6;
+    --card-border: rgba(43,36,31,0.08);
+    --accent-sakura: #e78fa6;
+    --accent-sakura-deep: #d1637e;
+    --accent-indigo: #3d5a78;
+    --accent-gold: #c69657;
+    --fuji-fill: #b7c3da;
+    --fuji-snow: #ffffff;
+    --hill-fill: #cdd9c9;
+    --tower-color: #9fb0c9;
+    --shadow-soft: 0 10px 24px rgba(70,45,40,0.08);
+    --shadow-card: 0 12px 30px rgba(70,45,40,0.10);
+    --color-correct: #4f9d6e;
+    --color-wrong: #c65c56;
+    --sun-op: 1; --moon-op: 0; --star-op: 0; --bird-op: .55;
+    --transition: background .5s var(--ease), color .5s var(--ease), border-color .5s var(--ease);
+  }
+  .app[data-theme="dark"]{
+    --bg-sky-top: #171a30;
+    --bg-sky-mid: #10101f;
+    --bg-sky-bot: #0b0b14;
+    --ink: #f2ede4;
+    --ink-soft: #b6aec2;
+    --ink-faint: #6c6480;
+    --card-bg: #1b1d30;
+    --card-bg-soft: #20223a;
+    --card-border: rgba(244,239,231,0.09);
+    --accent-sakura: #e6a3b8;
+    --accent-sakura-deep: #f0b6c7;
+    --accent-indigo: #9fc0e8;
+    --accent-gold: #e3c283;
+    --fuji-fill: #232544;
+    --fuji-snow: #3a3c66;
+    --hill-fill: #191a30;
+    --tower-color: #cba15f;
+    --shadow-soft: 0 10px 24px rgba(0,0,0,0.4);
+    --shadow-card: 0 14px 34px rgba(0,0,0,0.48);
+    --color-correct: #7fd9a0;
+    --color-wrong: #f08a86;
+    --sun-op: 0; --moon-op: 1; --star-op: 1; --bird-op: 0;
+  }
+
+  /* ============ SHELL ============ */
+  .app{
+    position:relative; width:100%; max-width:420px; min-height:100dvh;
+    overflow-x:hidden; overflow-y:auto;
+    background: linear-gradient(180deg, var(--bg-sky-top) 0%, var(--bg-sky-mid) 45%, var(--bg-sky-bot) 100%);
+    color:var(--ink); transition:var(--transition);
+    box-shadow: 0 0 50px rgba(0,0,0,0.15);
+  }
+  .scenery{ position:absolute; top:0; left:0; right:0; height:180px; overflow:hidden; pointer-events:none; z-index:0; }
+  .scenery svg{ width:100%; height:100%; display:block; }
+  .scenery .sun-disc{ opacity:var(--sun-op); transition:opacity .6s var(--ease); }
+  .scenery .moon-disc{ opacity:var(--moon-op); transition:opacity .6s var(--ease); }
+  .scenery .stars{ opacity:var(--star-op); transition:opacity .6s var(--ease); }
+  .scenery .birds{ opacity:var(--bird-op); transition:opacity .6s var(--ease); }
+  .scenery .fuji-body{ fill:var(--fuji-fill); transition:fill .5s var(--ease); }
+  .scenery .fuji-snow{ fill:var(--fuji-snow); transition:fill .5s var(--ease); }
+  .scenery .hill{ fill:var(--hill-fill); transition:fill .5s var(--ease); }
+  .scenery .tower-lines{ stroke:var(--tower-color); transition:stroke .5s var(--ease); }
+
+  .petals{ position:absolute; inset:0; height:280px; z-index:1; pointer-events:none; overflow:hidden; }
+  .petal{ position:absolute; top:-10%; width:8px; height:8px; background:var(--accent-sakura); border-radius:0 100% 0 100%; opacity:.7; animation: fall linear infinite; transition: background .5s var(--ease); }
+  @keyframes fall{ 0%{ transform: translate(0,0) rotate(0deg);} 100%{ transform: translate(var(--drift,30px), 280px) rotate(340deg);} }
+
+  /* ============ TOPBAR & LIVE COUNTER ============ */
+  .content{ position:relative; z-index:2; padding: 14px 14px 24px; }
+  .topbar{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; gap:8px; }
+  .brand{ display:flex; flex-direction:column; gap:2px; }
+  .brand .eyebrow{ font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:.14em; font-weight:600; color:var(--ink-soft); text-transform:uppercase; }
+  .brand .title{ display:flex; align-items:baseline; gap:6px; font-family:'Zen Kaku Gothic New','Poppins',sans-serif; font-weight:900; font-size:20px; color:var(--ink); }
+  .brand .rule{ width:30px; height:2.5px; border-radius:2px; margin-top:3px; background: linear-gradient(90deg, var(--accent-gold), var(--accent-sakura)); }
+
+  .topbar-actions{ display:flex; align-items:center; gap:8px; }
+  
+  .live-counter{
+    display:inline-flex; align-items:center; gap:5px;
+    background:var(--card-bg); border:1px solid var(--card-border);
+    padding:5px 9px; border-radius:999px;
+    box-shadow:var(--shadow-soft);
+    font-family:'Poppins',sans-serif; font-size:10.5px; font-weight:600;
+    color:var(--ink); transition:var(--transition);
+    white-space:nowrap;
+  }
+  .pulse-dot{
+    width:6px; height:6px; background-color:#22c55e; border-radius:50%;
+    box-shadow:0 0 0 0 rgba(34,197,94,0.7);
+    animation:livePulse 1.8s infinite cubic-bezier(0.66,0,0,1);
+    flex-shrink:0;
+  }
+  @keyframes livePulse{
+    0%{ box-shadow:0 0 0 0 rgba(34,197,94,0.7); }
+    70%{ box-shadow:0 0 0 6px rgba(34,197,94,0); }
+    100%{ box-shadow:0 0 0 0 rgba(34,197,94,0); }
+  }
+
+  .theme-toggle{ position:relative; width:48px; height:26px; border-radius:999px; border:1px solid var(--card-border); background:var(--card-bg); box-shadow: var(--shadow-soft); cursor:pointer; display:flex; align-items:center; padding:2px; transition:var(--transition); flex-shrink:0; }
+  .theme-toggle .knob{ width:20px; height:20px; border-radius:50%; background: linear-gradient(155deg, var(--accent-gold), var(--accent-sakura-deep)); display:flex; align-items:center; justify-content:center; transform: translateX(0); transition: transform .4s var(--ease); box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+  .app[data-theme="dark"] .theme-toggle .knob{ transform: translateX(22px); }
+  .theme-toggle .knob svg{ width:11px; height:11px; }
+  .theme-toggle .icon-static{ position:absolute; }
+  .theme-toggle .icon-static.sun{ left:6px; } .theme-toggle .icon-static.moon{ right:5px; }
+  .theme-toggle .icon-static svg{ width:11px; height:11px; opacity:.55; }
+  .theme-toggle .icon-static.sun svg{ stroke:var(--accent-gold); }
+  .theme-toggle .icon-static.moon svg{ stroke:var(--accent-indigo); }
+
+  /* ============ SCREEN TRANSITION ============ */
+  .screen-inner{ animation: screenIn .35s var(--ease); }
+  @keyframes screenIn{ from{ opacity:0; transform:translateY(6px);} to{ opacity:1; transform:translateY(0);} }
+
+  /* ============ BENTO BASE ============ */
+  .bento-grid{ display:grid; grid-template-columns: 1fr 1fr; gap: var(--gap); }
+  .bento{ background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-lg); box-shadow:var(--shadow-soft); transition:var(--transition); }
+  .span-2{ grid-column: 1 / -1; }
+
+  .stat-tile{ padding:14px 14px 12px; display:flex; flex-direction:column; gap:8px; }
+  .stat-tile .icon-wrap{ width:30px; height:30px; border-radius:9px; display:flex; align-items:center; justify-content:center; background: linear-gradient(155deg, rgba(198,150,87,.16), rgba(231,143,166,.16)); }
+  .stat-tile .icon-wrap svg{ width:16px; height:16px; stroke:var(--accent-gold); }
+  .stat-tile.learned .icon-wrap svg{ stroke:var(--accent-indigo); }
+  .stat-tile .num{ font-family:'Poppins',sans-serif; font-weight:700; font-size:20px; line-height:1; color:var(--ink); }
+  .stat-tile .num .unit{ font-size:12px; font-weight:500; color:var(--ink-soft); margin-left:2px; }
+  .stat-tile .cap{ font-family:'Noto Sans JP',sans-serif; font-size:11px; color:var(--ink-soft); font-weight:500; }
+
+  .section-label{ font-family:'Noto Sans JP',sans-serif; font-size:10.5px; font-weight:600; letter-spacing:.08em; color:var(--ink-faint); text-transform:uppercase; margin: 16px 2px 8px; }
+
+  .progress-bar{ width:100%; height:4px; border-radius:4px; background:var(--card-border); overflow:hidden; }
+  .progress-bar span{ display:block; height:100%; border-radius:4px; background:linear-gradient(90deg,var(--accent-gold),var(--accent-sakura)); transition:width .4s var(--ease); }
+
+  /* Accent styling */
+  .accent-gold .emblem, .accent-gold .g-icon, .g-icon.accent-gold{ background:linear-gradient(155deg, var(--accent-gold), var(--accent-sakura-deep)); }
+  .accent-indigo .emblem, .accent-indigo .g-icon, .g-icon.accent-indigo{ background:linear-gradient(155deg, var(--accent-indigo), var(--accent-gold)); }
+  .accent-sakura .emblem, .accent-sakura .g-icon, .g-icon.accent-sakura{ background:linear-gradient(155deg, var(--accent-sakura-deep), var(--accent-indigo)); }
+  .accent-gold{ --tile-glow: var(--accent-gold); }
+  .accent-indigo{ --tile-glow: var(--accent-indigo); }
+  .accent-sakura{ --tile-glow: var(--accent-sakura-deep); }
+
+  /* ============ HERO TILES ============ */
+  .bab-tile{ display:block; width:100%; text-align:left; border:1px solid var(--card-border); background:var(--card-bg); border-radius:var(--radius-xl); padding:16px; box-shadow:var(--shadow-soft); cursor:pointer; position:relative; overflow:hidden; margin-bottom:12px; color:var(--ink); }
+  .bab-tile .glow{ position:absolute; width:150px; height:150px; border-radius:50%; filter:blur(6px); opacity:.3; top:-50px; right:-40px; background: radial-gradient(circle, var(--tile-glow, var(--accent-indigo)), transparent 70%); }
+  .bab-tile .emblem{ width:44px; height:44px; border-radius:14px; display:flex; align-items:center; justify-content:center; margin-bottom:10px; position:relative; z-index:1; box-shadow:0 6px 14px rgba(0,0,0,.10); }
+  .bab-tile .emblem svg{ width:22px; height:22px; stroke:#fff; }
+  .bab-tile .eyebrow{ position:relative; z-index:1; font-family:'Noto Sans JP',sans-serif; font-size:10px; letter-spacing:.12em; font-weight:600; color:var(--ink-faint); text-transform:uppercase; }
+  .bab-tile .bab-title{ position:relative; z-index:1; font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:17px; margin:3px 0 5px; color:var(--ink); line-height:1.25; }
+  .bab-tile .bab-desc{ position:relative; z-index:1; font-family:'Noto Sans JP',sans-serif; font-size:11.5px; color:var(--ink-soft); line-height:1.45; margin-bottom:12px; }
+  .bab-tile .bab-meta{ position:relative; z-index:1; display:flex; gap:14px; margin-bottom:10px; }
+  .bab-tile .bab-meta .meta-num{ font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; color:var(--ink); }
+  .bab-tile .bab-meta .meta-label{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; color:var(--ink-faint); }
+  .bab-tile .bab-progress{ position:relative; z-index:1; }
+
+  .bab-tile.accent-indigo{ background: linear-gradient(150deg, color-mix(in srgb, var(--accent-indigo) 18%, var(--card-bg)) 0%, color-mix(in srgb, var(--accent-gold) 8%, var(--card-bg)) 100%); border-color: color-mix(in srgb, var(--accent-indigo) 30%, var(--card-border)); }
+  .bab-tile.accent-sakura{ background: linear-gradient(150deg, color-mix(in srgb, var(--accent-sakura-deep) 18%, var(--card-bg)) 0%, color-mix(in srgb, var(--accent-indigo) 8%, var(--card-bg)) 100%); border-color: color-mix(in srgb, var(--accent-sakura-deep) 30%, var(--card-border)); }
+
+  .bab-tile.test-cta{
+    background: linear-gradient(150deg, color-mix(in srgb, var(--accent-indigo) 18%, var(--card-bg)) 0%, color-mix(in srgb, var(--accent-sakura-deep) 12%, var(--card-bg)) 50%, color-mix(in srgb, var(--accent-gold) 12%, var(--card-bg)) 100%);
+    border-color: color-mix(in srgb, var(--accent-indigo) 30%, var(--card-border));
+    --tile-glow: var(--accent-indigo);
+  }
+  .bab-tile.test-cta .emblem{ background: linear-gradient(155deg, var(--accent-indigo), var(--accent-sakura-deep)); }
+
+  .bab-tile.bunpou-cta{
+    background: linear-gradient(150deg, color-mix(in srgb, var(--accent-sakura-deep) 18%, var(--card-bg)) 0%, color-mix(in srgb, var(--accent-gold) 12%, var(--card-bg)) 100%);
+    border-color: color-mix(in srgb, var(--accent-sakura-deep) 30%, var(--card-border));
+    --tile-glow: var(--accent-sakura-deep);
+  }
+  .bab-tile.bunpou-cta .emblem{ background: linear-gradient(155deg, var(--accent-sakura-deep), var(--accent-gold)); }
+
+  /* ============ GROUP ROWS ============ */
+  .group-row{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-lg); padding:12px; box-shadow:var(--shadow-soft); cursor:pointer; margin-bottom:8px; }
+  .group-row .g-icon{ width:40px; height:40px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; }
+  .group-row .g-icon svg{ width:18px; height:18px; stroke:#fff; }
+  .group-row .g-body{ flex:1; min-width:0; }
+  .group-row .g-title{ font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:13.5px; color:var(--ink); margin-bottom:1px; }
+  .group-row .g-desc{ font-family:'Noto Sans JP',sans-serif; font-size:11px; color:var(--ink-soft); margin-bottom:5px; line-height:1.35; }
+  .group-row .g-tags{ display:flex; gap:5px; flex-wrap:wrap; }
+  .group-row .g-tag{ font-family:'Poppins',sans-serif; font-size:9px; font-weight:600; padding:2px 7px; border-radius:999px; background:var(--card-bg-soft); color:var(--ink-soft); border:1px solid var(--card-border); white-space:nowrap; }
+  .group-row .g-tag.page-tag{ background:rgba(198,150,87,.18); color:var(--accent-gold); border-color:transparent; font-weight:700; }
+  .group-row .g-tag.done{ background:rgba(79,157,110,.16); color:var(--color-correct); border-color:transparent; }
+  .group-row .g-chevron{ flex-shrink:0; opacity:.45; }
+  .group-row .g-chevron svg{ width:15px; height:15px; stroke:var(--ink-soft); }
+
+  .group-row.accent-indigo{ background: linear-gradient(120deg, color-mix(in srgb, var(--accent-indigo) 12%, var(--card-bg)) 0%, var(--card-bg) 65%); border-color: color-mix(in srgb, var(--accent-indigo) 25%, var(--card-border)); }
+  .group-row.accent-sakura{ background: linear-gradient(120deg, color-mix(in srgb, var(--accent-sakura-deep) 12%, var(--card-bg)) 0%, var(--card-bg) 65%); border-color: color-mix(in srgb, var(--accent-sakura-deep) 25%, var(--card-border)); }
+
+  /* ============ BACK ROW ============ */
+  .back-row{ display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .back-btn{ width:32px; height:32px; border-radius:10px; background:var(--card-bg); border:1px solid var(--card-border); display:flex; align-items:center; justify-content:center; box-shadow:var(--shadow-soft); cursor:pointer; flex-shrink:0; }
+  .back-btn svg{ width:14px; height:14px; stroke:var(--ink-soft); }
+  .crumb{ display:flex; flex-direction:column; gap:1px; min-width:0; flex:1; }
+  .crumb .eyebrow{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; letter-spacing:.12em; font-weight:600; color:var(--ink-faint); text-transform:uppercase; }
+  .crumb .crumb-title{ font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:15px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  /* ============ COMPACT FLASHCARD ============ */
+  .meta-bar{ padding:8px 12px; display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; border-radius:14px; }
+  .meta-bar .meta-left{ display:flex; flex-direction:column; gap:2px; min-width:0; }
+  .meta-bar .meta-cat{ font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:11.5px; color:var(--ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .meta-bar .meta-page{ font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; color:var(--accent-gold); }
+  .meta-bar .meta-right{ display:flex; flex-direction:column; align-items:flex-end; gap:4px; min-width:72px; }
+  .meta-bar .meta-count{ font-family:'Poppins',sans-serif; font-size:10px; font-weight:600; color:var(--ink-soft); white-space:nowrap; }
+
+  .flashcard{
+    position:relative; width:100%; height:195px; cursor:pointer; margin-bottom:12px;
+    perspective:1200px; -webkit-perspective:1200px;
+  }
+  .exclude-btn{
+    position:absolute; top:-8px; right:-6px; z-index:10;
+    width:30px; height:30px; border-radius:9px;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--card-bg); border:1px solid var(--card-border);
+    box-shadow:var(--shadow-soft); cursor:pointer;
+    transition:var(--transition), transform .2s var(--ease);
+  }
+  .exclude-btn svg{ width:13px; height:13px; stroke:var(--ink-soft); }
+  .exclude-btn:active{ transform:scale(.9); }
+  .exclude-btn.is-excluded{ background: linear-gradient(155deg, var(--accent-gold), var(--accent-sakura-deep)); border-color:transparent; }
+  .exclude-btn.is-excluded svg{ stroke:#fff; }
+
+  .flashcard-inner{
+    position:relative; width:100%; height:100%;
+    transition: transform .6s var(--ease);
+    transform-style:preserve-3d; -webkit-transform-style:preserve-3d;
+  }
+  .flashcard.flipped .flashcard-inner{
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+  }
+
+  .face{
+    position:absolute; inset:0; width:100%; height:100%;
+    border-radius:var(--radius-lg); padding:12px 14px;
+    display:flex; flex-direction:column; justify-content:space-between;
+    background:var(--card-bg); border:1px solid var(--card-border);
+    box-shadow:var(--shadow-card); transition:var(--transition);
+    backface-visibility:hidden; -webkit-backface-visibility:hidden;
+    transform: translate3d(0,0,0); -webkit-transform: translate3d(0,0,0);
+  }
+  .face.front{
+    transform: rotateY(0deg); -webkit-transform: rotateY(0deg);
+    z-index:2;
+  }
+  .face.back{
+    transform: rotateY(180deg); -webkit-transform: rotateY(180deg);
+    z-index:1;
+  }
+
+  .face-top{ display:flex; align-items:flex-start; justify-content:space-between; gap:6px; }
+  .face-top-left{ display:flex; align-items:center; gap:5px; min-width:0; }
+  .badge{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; font-weight:600; padding:3px 8px; border-radius:999px; background: rgba(198,150,87,.14); color:var(--accent-gold); letter-spacing:.02em; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .badge.blue{ background:rgba(61,90,120,.12); color:var(--accent-indigo); }
+  .badge.sakura{ background:rgba(209,99,126,.14); color:var(--accent-sakura-deep); }
+
+  .learned-badge{ width:18px; height:18px; border-radius:50%; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, var(--accent-gold), var(--accent-sakura-deep)); opacity:0; transform:scale(.4); transition: opacity .35s var(--ease), transform .35s var(--ease); flex-shrink:0; }
+  .learned-badge svg{ width:9px; height:9px; stroke:#fff; }
+  .flashcard.is-learned .learned-badge{ opacity:1; transform:scale(1); }
+
+  .face-mid{ flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; text-align:center; padding:2px 0; min-height:0; }
+  .kana-word{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:22px; font-weight:700; color:var(--ink); line-height:1.2; }
+  .kana-romaji{ font-family:'Poppins',sans-serif; font-size:11.5px; font-weight:500; color:var(--ink-faint); margin-top:1px; }
+  .kanji-display{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:46px; font-weight:900; color:var(--ink); line-height:1; }
+
+  .face-bottom{ display:flex; align-items:center; justify-content:center; gap:5px; flex-shrink:0; }
+  .flip-hint{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; color:var(--ink-faint); display:flex; align-items:center; gap:4px; }
+  .flip-hint svg{ width:10px; height:10px; stroke:var(--ink-faint); }
+
+  .arti-label{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent-sakura-deep); }
+  .arti-text{ font-family:'Poppins',sans-serif; font-weight:700; font-size:16px; color:var(--ink); line-height:1.3; padding:0 2px; text-align:center; }
+
+  /* ============ NAV ROW ============ */
+  .nav-row{ display:grid; grid-template-columns:1fr auto 1fr; gap:var(--gap); align-items:center; }
+  .shuffle-btn{ width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:var(--card-bg); border:1.5px dashed var(--card-border); box-shadow:var(--shadow-soft); cursor:pointer; flex-shrink:0; transition:var(--transition), transform .25s var(--ease); }
+  .shuffle-btn svg{ width:16px; height:16px; stroke:var(--ink-soft); }
+  .shuffle-btn.is-active{ background: linear-gradient(155deg, var(--accent-indigo), var(--accent-sakura-deep)); border-style:solid; border-color:transparent; }
+  .shuffle-btn.is-active svg{ stroke:#fff; }
+  .nav-btn{ display:flex; align-items:center; justify-content:center; gap:6px; padding:10px 12px; border-radius:12px; font-family:'Noto Sans JP',sans-serif; font-weight:600; font-size:12px; color:var(--ink-soft); cursor:pointer; border:1px solid var(--card-border); background:var(--card-bg); }
+  .nav-btn svg{ width:13px; height:13px; stroke:var(--ink-soft); }
+  .nav-btn[disabled]{ opacity:.4; cursor:not-allowed; }
+  .nav-btn.primary{ background: linear-gradient(135deg, var(--accent-indigo), var(--accent-sakura-deep)); color:#fff; border-color:transparent; }
+  .nav-btn.primary svg{ stroke:#fff; }
+  .deck-count{ text-align:center; margin-top:8px; font-family:'Poppins',sans-serif; font-size:10.5px; letter-spacing:.06em; color:var(--ink-faint); }
+
+  /* ============ TOGGLE CONTROLS ============ */
+  .deck-controls{ display:flex; flex-direction:column; gap:6px; margin-top:10px; }
+  .control-toggle-card{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:8px 10px; background:var(--card-bg); border:1px solid var(--card-border);
+    border-radius:12px; box-shadow:var(--shadow-soft); transition:var(--transition);
+  }
+  .control-label{ display:flex; align-items:center; gap:8px; min-width:0; }
+  .control-icon{
+    width:26px; height:26px; border-radius:8px; background:var(--card-bg-soft);
+    border:1px solid var(--card-border); display:flex; align-items:center;
+    justify-content:center; flex-shrink:0;
+  }
+  .control-icon svg{ width:13px; height:13px; stroke:var(--accent-indigo); }
+  .control-icon.sakura svg{ stroke:var(--accent-sakura-deep); }
+  .control-text{ display:flex; flex-direction:column; gap:1px; min-width:0; }
+  .control-title{ font-family:'Noto Sans JP',sans-serif; font-size:11.5px; font-weight:700; color:var(--ink); line-height:1.2; }
+  .control-sub{ font-family:'Noto Sans JP',sans-serif; font-size:9.5px; color:var(--ink-soft); line-height:1.15; }
+
+  .switch-btn{
+    position:relative; width:42px; height:22px; border-radius:999px;
+    background:var(--card-border); border:1px solid var(--card-border);
+    cursor:pointer; padding:2px; transition:background .3s var(--ease), border-color .3s var(--ease);
+    flex-shrink:0;
+  }
+  .switch-btn .switch-knob{
+    display:block; width:16px; height:16px; border-radius:50%;
+    background:#ffffff; box-shadow:0 1.5px 4px rgba(0,0,0,0.25);
+    transform:translateX(0); transition:transform .3s var(--ease);
+  }
+  .switch-btn.is-active{
+    background:linear-gradient(135deg, var(--accent-indigo), var(--accent-sakura-deep));
+    border-color:transparent;
+  }
+  .switch-btn.is-active .switch-knob{
+    transform:translateX(20px);
+  }
+
+  /* ============ BUNPOU CARDS & TABS ============ */
+  .bunpou-card{ padding:16px; margin-bottom:12px; display:flex; flex-direction:column; gap:10px; }
+  .bunpou-header{ display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+  .bunpou-title{ font-family:'Zen Kaku Gothic New',sans-serif; font-size:16px; font-weight:900; color:var(--ink); line-height:1.25; margin-top:2px; }
+  .formula-container{ display:flex; flex-direction:column; gap:6px; background:var(--card-bg-soft); border:1px solid var(--card-border); border-radius:12px; padding:10px 12px; }
+  .formula-row{ display:flex; align-items:center; flex-wrap:wrap; gap:5px; }
+  .formula-pill{ font-family:'Noto Sans JP',sans-serif; font-size:10.5px; font-weight:600; padding:3px 8px; border-radius:999px; background:var(--card-bg); border:1px solid var(--card-border); color:var(--ink); white-space:nowrap; }
+  .formula-pill.gold{ background:rgba(198,150,87,.15); color:var(--accent-gold); border-color:transparent; }
+  .formula-pill.blue{ background:rgba(61,90,120,.12); color:var(--accent-indigo); border-color:transparent; }
+  .formula-pill.sakura{ background:rgba(209,99,126,.15); color:var(--accent-sakura-deep); border-color:transparent; }
+  .formula-op{ font-family:'Poppins',sans-serif; font-size:12px; font-weight:700; color:var(--ink-faint); padding:0 1px; }
+  .bunpou-desc{ font-family:'Noto Sans JP',sans-serif; font-size:11.5px; color:var(--ink-soft); line-height:1.55; }
+  .bunpou-desc ul, .bunpou-desc ol{ margin:4px 0; padding-left:18px; }
+  .bunpou-desc li{ margin-bottom:3px; }
+  .bunpou-examples{ display:flex; flex-direction:column; gap:8px; border-top:1px dashed var(--card-border); padding-top:10px; }
+  
+  .example{ background:var(--card-bg-soft); border-left:3px solid var(--accent-gold); padding:8px 10px; border-radius:0 10px 10px 0; display:flex; flex-direction:column; gap:2px; }
+  .example .jp-ex{ color:var(--ink); font-weight:700; font-size:12.5px; font-family:'Zen Kaku Gothic New',sans-serif; line-height:1.35; }
+  .example .jp-romaji{ color:var(--accent-indigo); font-size:10.5px; font-weight:500; font-style:italic; line-height:1.25; }
+  .example .jp-arti{ color:var(--ink-soft); font-size:11px; font-weight:400; line-height:1.35; }
+
+  .kaiwa-box{ padding:14px; margin-bottom:12px; background:linear-gradient(135deg, color-mix(in srgb, var(--accent-indigo) 14%, var(--card-bg)) 0%, var(--card-bg) 100%); border:1px solid color-mix(in srgb, var(--accent-indigo) 28%, var(--card-border)); border-radius:var(--radius-lg); }
+  .kaiwa-title{ font-family:'Zen Kaku Gothic New',sans-serif; font-weight:700; font-size:12px; color:var(--accent-indigo); margin-bottom:10px; display:flex; align-items:center; gap:5px; text-transform:uppercase; letter-spacing:.05em; }
+  .kaiwa-item{ display:flex; gap:6px; margin-bottom:10px; }
+  .kaiwa-item:last-child{ margin-bottom:0; }
+  .kaiwa-speaker{ font-family:'Zen Kaku Gothic New',sans-serif; font-weight:900; font-size:11.5px; color:var(--ink); min-width:64px; flex-shrink:0; }
+  .kaiwa-body{ display:flex; flex-direction:column; gap:1px; flex:1; }
+  .kaiwa-jp{ font-weight:700; font-size:12.5px; color:var(--ink); line-height:1.3; font-family:'Zen Kaku Gothic New',sans-serif; }
+  .kaiwa-romaji{ font-size:10.5px; color:var(--accent-indigo); font-style:italic; line-height:1.25; font-family:'Poppins',sans-serif; }
+  .kaiwa-id{ font-size:11px; color:var(--ink-soft); line-height:1.35; }
+
+  /* ============ QUIZ & MATCH ============ */
+  .mode-card{ display:flex; align-items:center; gap:12px; width:100%; text-align:left; background:var(--card-bg); border:1px solid var(--card-border); border-radius:var(--radius-lg); padding:14px 12px; box-shadow:var(--shadow-soft); cursor:pointer; margin-bottom:10px; }
+  .mode-card .m-icon{ width:42px; height:42px; border-radius:12px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background: linear-gradient(155deg, var(--accent-indigo), var(--accent-gold)); }
+  .mode-card .m-icon svg{ width:19px; height:19px; stroke:#fff; }
+  .mode-card.mode-match .m-icon{ background: linear-gradient(155deg, var(--accent-sakura-deep), var(--accent-indigo)); }
+  .mode-card .m-body{ flex:1; min-width:0; }
+  .mode-card .m-title{ font-family:'Noto Sans JP',sans-serif; font-weight:700; font-size:13.5px; color:var(--ink); margin-bottom:2px; }
+  .mode-card .m-desc{ font-family:'Noto Sans JP',sans-serif; font-size:11px; color:var(--ink-soft); line-height:1.4; }
+
+  .score-chip{ font-family:'Poppins',sans-serif; font-size:10px; font-weight:700; padding:3px 8px; border-radius:999px; }
+  .score-chip.correct{ background: color-mix(in srgb, var(--color-correct) 18%, var(--card-bg)); color:var(--color-correct); }
+  .score-chip.wrong{ background: color-mix(in srgb, var(--color-wrong) 18%, var(--card-bg)); color:var(--color-wrong); }
+  .quiz-question{ padding:18px 14px; text-align:center; margin-bottom:12px; }
+  .quiz-option{ display:flex; align-items:center; justify-content:space-between; gap:8px; width:100%; text-align:left; padding:12px 14px; border-radius:var(--radius-md); background:var(--card-bg); border:1.5px solid var(--card-border); font-family:'Noto Sans JP',sans-serif; font-size:13px; font-weight:600; color:var(--ink); margin-bottom:8px; cursor:pointer; }
+  .quiz-option.is-correct{ border-color:var(--color-correct); background: color-mix(in srgb, var(--color-correct) 14%, var(--card-bg)); }
+  .quiz-option.is-wrong{ border-color:var(--color-wrong); background: color-mix(in srgb, var(--color-wrong) 14%, var(--card-bg)); }
+  .quiz-option.is-disabled{ pointer-events:none; opacity:.8; }
+
+  .match-columns{ display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-bottom:6px; }
+  .match-col{ display:flex; flex-direction:column; gap:6px; }
+  .match-tile{ padding:8px; border-radius:10px; background:var(--card-bg); border:1.5px solid var(--card-border); font-family:'Noto Sans JP',sans-serif; font-size:11px; font-weight:600; color:var(--ink); text-align:center; cursor:pointer; min-height:42px; display:flex; align-items:center; justify-content:center; }
+  .match-tile.is-selected{ border-color:var(--accent-indigo); background: color-mix(in srgb, var(--accent-indigo) 16%, var(--card-bg)); }
+  .match-tile.is-correct{ border-color:var(--color-correct); background: color-mix(in srgb, var(--color-correct) 16%, var(--card-bg)); opacity:.55; pointer-events:none; }
+  .match-tile.is-wrong{ border-color:var(--color-wrong); background: color-mix(in srgb, var(--color-wrong) 18%, var(--card-bg)); }
+
+  .result-card{ padding:26px 18px; text-align:center; }
+  .result-card .r-icon{ width:50px; height:50px; border-radius:16px; margin:0 auto 12px; display:flex; align-items:center; justify-content:center; background: linear-gradient(155deg, var(--accent-gold), var(--accent-sakura-deep)); }
+  .result-card .r-icon svg{ width:24px; height:24px; stroke:#fff; }
+  .result-card .r-score{ font-family:'Poppins',sans-serif; font-weight:800; font-size:34px; color:var(--ink); line-height:1; }
+
+  .reset-link{ display:block; margin:14px auto 0; padding:6px 12px; background:none; border:none; cursor:pointer; font-family:'Noto Sans JP',sans-serif; font-size:10.5px; font-weight:500; color:var(--ink-faint); text-decoration:underline; }
+</style>
+</head>
+<body>
+
+<div class="app" data-theme="light" id="app">
+
+  <div class="scenery" aria-hidden="true">
+    <svg viewBox="0 0 400 180" preserveAspectRatio="xMidYMax slice">
+      <circle class="stars" cx="40" cy="25" r="1.2" fill="#f2ecff"/>
+      <circle class="stars" cx="90" cy="45" r="1" fill="#f2ecff"/>
+      <circle class="stars" cx="330" cy="20" r="1.1" fill="#f2ecff"/>
+      <circle class="stars" cx="360" cy="50" r="1" fill="#f2ecff"/>
+      <circle class="sun-disc" cx="330" cy="40" r="22" fill="#ffd9a8" opacity="0.9"/>
+      <circle class="moon-disc" cx="330" cy="40" r="17" fill="#efe6c9" opacity="0.95"/>
+      <path class="birds" d="M40,50 q5,-6 10,0 q5,-6 10,0" stroke="#7a6d64" stroke-width="1.4" fill="none" stroke-linecap="round"/>
+      <path class="fuji-body" d="M0,165 L128,48 C136,38 144,38 150,48 L160,35 C166,28 174,28 180,35 L192,50 C198,42 206,42 212,50 L400,165 Z"/>
+      <path class="fuji-snow" d="M126,58 L150,32 L158,45 L167,35 L176,46 L184,36 L198,55 L188,52 L176,58 L167,50 L158,58 L148,52 L138,58 Z"/>
+      <path class="hill" d="M-10,175 C60,150 110,155 180,175 C240,190 300,180 410,175 L410,200 L-10,200 Z"/>
+      <g class="tower-lines" fill="none" stroke-width="1.8" stroke-linecap="round">
+        <path d="M258,170 L282,62 L306,170"/>
+        <line x1="282" y1="62" x2="282" y2="36"/>
+        <line x1="266" y1="142" x2="298" y2="142"/>
+      </g>
+    </svg>
+    <div class="petals" id="petals"></div>
+  </div>
+
+  <div class="content">
+    <div class="topbar">
+      <div class="brand">
+        <span class="eyebrow">JLPT N5 · BAHASA JEPANG</span>
+        <span class="title"><span>和</span> Flashcards</span>
+        <span class="rule"></span>
+      </div>
+      <div class="topbar-actions">
+        <!-- Live Counter -->
+        <div class="live-counter">
+          <span class="pulse-dot"></span>
+          <span id="user-count">1 sedang belajar</span>
+        </div>
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="themeToggle" aria-label="Ganti tema">
+          <span class="icon-static sun"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+          <span class="icon-static moon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg></span>
+          <span class="knob"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" id="knobIcon"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></span>
+        </button>
+      </div>
+    </div>
+
+    <div id="screen"></div>
+  </div>
+</div>
+
+<!-- ============================================================
+     FIREBASE REALTIME DATABASE (LIVE ONLINE COUNTER)
+     ============================================================ -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+  import { 
+    getDatabase, 
+    ref, 
+    onValue, 
+    push, 
+    onDisconnect, 
+    set 
+  } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDpVcVo-yn0plYtIe1Us68MOZ7CVcc1o8w",
+    authDomain: "flashcardo12.firebaseapp.com",
+    databaseURL: "https://flashcardo12-default-rtdb.asia-southeast1.firebasedatabase.app",
+    projectId: "flashcardo12",
+    storageBucket: "flashcardo12.firebasestorage.app",
+    messagingSenderId: "77098450793",
+    appId: "1:77098450793:web:97319437563d90447bc7f8"
+  };
+
+  try {
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+    const countElement = document.getElementById("user-count");
+    const connectedRef = ref(db, ".info/connected");
+    const onlineUsersRef = ref(db, "online_users");
+
+    onValue(connectedRef, (snap) => {
+      if (snap.val() === true) {
+        const myUserRef = push(onlineUsersRef);
+        set(myUserRef, { joinedAt: Date.now() });
+        onDisconnect(myUserRef).remove();
+      }
+    });
+
+    onValue(onlineUsersRef, (snap) => {
+      const totalOnline = snap.exists() ? Object.keys(snap.val()).length : 1;
+      if (countElement) {
+        countElement.textContent = `${totalOnline} sedang belajar`;
+      }
+    });
+  } catch (err) {
+    const countElement = document.getElementById("user-count");
+    if (countElement) countElement.textContent = "1 sedang belajar";
+  }
+</script>
+
+<script>
+/* ============================================================
+   ICONS
+   ============================================================ */
+const ICONS = {
+  scale: '<path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h18"/>',
+  check: '<path d="M20 6 9 17l-5-5"/>',
+  chevLeft: '<path d="M15 18l-6-6 6-6"/>',
+  chevRight: '<path d="M9 18l6-6-6-6"/>',
+  speaker: '<path d="M11 5 6 9H2v6h4l5 4V5Z"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/>',
+  flame: '<path d="M8.5 14.5A2.5 2.5 0 0 0 11 17a2.5 2.5 0 0 0 2.5-2.5c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7.5 7.5 0 1 1-15 0c0-1.153.433-2.294 1-3 1.5-1.5 2-1.5 2-1.5"/>',
+  target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5.2"/><circle cx="12" cy="12" r="1.3"/>',
+  shuffle: '<path d="M2 18h1.4c1.4 0 2.7-.7 3.4-1.9L11 10M2 6h1.4c1.4 0 2.7.7 3.4 1.9l.4.6"/><path d="M22 18h-1.4c-1.4 0-2.7-.7-3.4-1.9L13 10M22 6h-1.4c-1.4 0-2.7.7-3.4 1.9L13 14"/><path d="M18 14l4 4-4 4M18 2l4 4-4 4"/>',
+  archive: '<rect x="3" y="4" width="18" height="4" rx="1"/><path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8"/><line x1="10" y1="12" x2="14" y2="12"/>',
+  clipboard: '<rect x="7" y="3" width="10" height="4" rx="1"/><path d="M9 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2h-2"/><path d="M9 12h6M9 16h6"/>',
+  link: '<path d="M9 17H7a5 5 0 0 1 0-10h2"/><path d="M15 7h2a5 5 0 0 1 0 10h-2"/><line x1="8" y1="12" x2="16" y2="12"/>',
+  trophy: '<path d="M8 21h8M12 17v4M7 4h10v4a5 5 0 0 1-10 0V4Z"/><path d="M7 5H4a1 1 0 0 0-1 1 4 4 0 0 0 4 4M17 5h3a1 1 0 0 1 1 1 4 4 0 0 1-4 4"/>',
+  close: '<line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>',
+  layers: '<path d="M12 2 2 7l10 5 10-5-10-5Z"/><path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>',
+  scroll: '<path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2Z"/><path d="M12 11h4M12 7h4M8 7h.01M8 11h.01M8 15h8"/>',
+  hanko: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.6"/><line x1="12" y1="2.4" x2="12" y2="5.6"/><line x1="12" y1="18.4" x2="12" y2="21.6"/><line x1="2.4" y1="12" x2="5.6" y2="12"/><line x1="18.4" y1="12" x2="21.6" y2="12"/>',
+  swap: '<path d="m16 3 4 4-4 4"/><path d="M20 7H4"/><path d="m8 21-4-4 4-4"/><path d="M4 17h16"/>',
+  shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>',
+  alert: '<circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/>'
+};
+function icon(name){ return ICONS[name] || ''; }
+
+/* ============ DATA MINNA NO NIHONGO BAB 6 ============ */
+function v(kana, arti, romaji){ return { type:'vocab', kana, arti, romaji }; }
+function k(kanji, words){ return { type:'kanji', kanji, words }; }
+
+const CHAPTERS = [
+  {
+    id: 'bab6',
+    number: '6',
+    title: 'Aktivitas Harian, Makanan & Minuman',
+    desc: '51 Kosakata Minna no Nihongo Bab 6 (Kata Kerja, Makanan, Minuman, Benda, Tempat & Ungkapan)',
+    icon: 'scale', accent: 'accent-indigo',
+    groups: [
+      {
+        id: 'b6_g1',
+        title: 'Tabel Kotoba: Kata Kerja (どうし)',
+        desc: '11 Kosakata kata kerja aktivitas sehari-hari',
+        page: 'Bab 6',
+        kategori: 'Kata Kerja',
+        icon: 'scale',
+        accent: 'accent-indigo',
+        cards: [
+          v('たべます', 'makan', 'tabemasu'),
+          v('のみます', 'minum', 'nomimasu'),
+          v('すいます［たばこを～］', 'mengisap [rokok], merokok', 'suimasu [tabako o ~]'),
+          v('みます', 'melihat, menonton', 'mimasu'),
+          v('ききます', 'mendengar', 'kikimasu'),
+          v('よみます', 'membaca', 'yomimasu'),
+          v('かきます', 'menulis, menggambar', 'kakimasu'),
+          v('かいます', 'membeli', 'kaimasu'),
+          v('とります［しゃしんを～］', 'mengambil [foto]', 'torimasu [shashin o ~]'),
+          v('します', 'mengerjakan, melakukan, berbuat', 'shimasu'),
+          v('あいます［ともだちに～］', 'bertemu [dengan teman]', 'aimasu [tomodachi ni ~]')
+        ]
+      },
+      {
+        id: 'b6_g2',
+        title: 'Tabel Kotoba: Makanan & Minuman',
+        desc: '18 Kosakata makanan, sayur, buah, minuman & rokok',
+        page: 'Bab 6',
+        kategori: 'Makanan & Minuman',
+        icon: 'flame',
+        accent: 'accent-sakura',
+        cards: [
+          v('ごはん', 'nasi', 'gohan'),
+          v('あさごはん', 'sarapan', 'asagohan'),
+          v('ひるごはん', 'makan siang', 'hirugohan'),
+          v('ばんごはん', 'makan malam', 'bangohan'),
+          v('パン', 'roti', 'pan'),
+          v('たまご', 'telur', 'tamago'),
+          v('にく', 'daging', 'niku'),
+          v('さかな', 'ikan', 'sakana'),
+          v('やさい', 'sayur', 'yasai'),
+          v('くだもの', 'buah-buahan', 'kudamono'),
+          v('みず', 'air', 'mizu'),
+          v('おちゃ', 'teh, teh Jepang (teh hijau)', 'ocha'),
+          v('こうちゃ', 'teh (teh hitam)', 'koucha'),
+          v('ぎゅうにゅう（ミルク）', 'susu', 'gyuunyuu (miruku)'),
+          v('ジュース', 'jus, sari buah', 'juusu'),
+          v('ビール', 'bir', 'biiru'),
+          v('［お］さけ', 'minuman keras', '[o]sake'),
+          v('たばこ', 'rokok', 'tabako')
+        ]
+      },
+      {
+        id: 'b6_g3',
+        title: 'Tabel Kotoba: Benda, Tempat & Kegiatan',
+        desc: '10 Kosakata benda fisik, tempat, surat & hobi',
+        page: 'Bab 6',
+        kategori: 'Benda & Tempat',
+        icon: 'target',
+        accent: 'accent-indigo',
+        cards: [
+          v('てがみ', 'surat', 'tegami'),
+          v('レポート', 'laporan', 'repooto'),
+          v('しゃしん', 'foto', 'shashin'),
+          v('ビデオ', 'kaset video, VHS', 'bideo'),
+          v('みせ', 'toko', 'mise'),
+          v('にわ', 'halaman', 'niwa'),
+          v('しゅくだい', 'pekerjaan rumah, PR (～を します: mengerjakan PR)', 'shukudai'),
+          v('テニス', 'tenis (～を します: bermain tenis)', 'tenisu'),
+          v('サッカー', 'sepak bola (～を します: bermain sepak bola)', 'sakkaa'),
+          v('［お］はなみ', '(O)Hanami, menikmati bunga Sakura (～を します: melihat dan menikmati bunga Sakura)', '[o]hanami')
+        ]
+      },
+      {
+        id: 'b6_g4',
+        title: 'Tabel Kotoba: Keterangan & Percakapan',
+        desc: '12 Kosakata kata tanya, kata keterangan frekuensi & ungkapan',
+        page: 'Bab 6',
+        kategori: 'Keterangan & Percakapan',
+        icon: 'clipboard',
+        accent: 'accent-sakura',
+        cards: [
+          v('なに', 'apa', 'nani'),
+          v('いっしょに', 'bersama-sama', 'isshoni'),
+          v('ちょっと', 'sebentar, sedikit', 'chotto'),
+          v('いつも', 'selalu', 'itsumo'),
+          v('ときどき', 'kadang-kadang', 'tokidoki'),
+          v('それから', 'setelah itu, kemudian', 'sorekara'),
+          v('ええ', 'ya', 'ee'),
+          v('いいですね。', 'Bagus ya./Baik ya.', 'ii desu ne'),
+          v('わかりました。', 'Mengerti./Baik.', 'wakarimashita'),
+          v('なんですか。', 'Apa?', 'nan desu ka'),
+          v('じゃ、また［あした］。', 'Ok, sampai jumpa [besok].', 'ja, mata [ashita]'),
+          v('メキシコ', 'Meksiko', 'Mekishiko')
+        ]
+      }
+    ]
+  }
+];
+
+/* ============================================================
+   STORAGE
+   ============================================================ */
+const STORE = { 
+  theme:'waFlashcards.theme', 
+  learned:'waFlashcards.learnedIds_n5_b6', 
+  excluded:'waFlashcards.excludedIds_n5_b6', 
+  streak:'waFlashcards.streakCount', 
+  lastVisit:'waFlashcards.lastVisit',
+  reverseMode:'waFlashcards.reverseMode',
+  autoTTS:'waFlashcards.autoTTS'
+};
+function safeGet(k, fb){ try{ const r = localStorage.getItem(k); return r === null ? fb : JSON.parse(r); }catch(e){ return fb; } }
+function safeSet(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+
+let rawLearned = safeGet(STORE.learned, []);
+let learnedSet = new Set(Array.isArray(rawLearned) ? rawLearned : []);
+function saveLearned(){ safeSet(STORE.learned, Array.from(learnedSet)); }
+
+let rawExcluded = safeGet(STORE.excluded, []);
+let excludedSet = new Set(Array.isArray(rawExcluded) ? rawExcluded : []);
+function saveExcluded(){ safeSet(STORE.excluded, Array.from(excludedSet)); }
+
+function cardUid(gid, idx){ return gid + '#' + idx; }
+
+function totalCardsInGroup(g){ return g.cards.length; }
+function learnedCountInGroup(g){ return g.cards.reduce((n,_,i)=> n + (learnedSet.has(cardUid(g.id,i)) ? 1 : 0), 0); }
+function totalCardsInChapter(c){ return c.groups.reduce((s,g)=> s + totalCardsInGroup(g), 0); }
+function learnedCountInChapter(c){ return c.groups.reduce((s,g)=> s + learnedCountInGroup(g), 0); }
+function totalCardsAll(){ return CHAPTERS.reduce((s,c)=> s + totalCardsInChapter(c), 0); }
+function learnedCountAll(){ return CHAPTERS.reduce((s,c)=> s + learnedCountInChapter(c), 0); }
+
+/* Text-to-Speech */
+function speakKana(htmlStr){
+  if('speechSynthesis' in window){
+    window.speechSynthesis.cancel();
+    const temp = document.createElement('div');
+    temp.innerHTML = htmlStr;
+    const rts = temp.querySelectorAll('rt');
+    rts.forEach(r => r.remove());
+    const cleanText = temp.textContent
+      .replace(/\[.*?\]/g, '')
+      .replace(/［.*?］/g, '')
+      .replace(/[\(\)（）]/g, '')
+      .replace(/～/g, '')
+      .trim();
+    const ut = new SpeechSynthesisUtterance(cleanText);
+    ut.lang = 'ja-JP';
+    ut.rate = 0.85;
+    window.speechSynthesis.speak(ut);
+  }
+}
+
+/* ============================================================
+   QUIZ SYSTEM (PILIHAN GANDA & PASANGAN JAWABAN)
+   ============================================================ */
+function shuffleArray(arr){
+  const a = arr.slice();
+  for(let i=a.length-1; i>0; i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function collectPool(chapterIds, kanjiOnly, targetGroupId){
+  let pool = [];
+  chapterIds.forEach(cid => {
+    const chap = CHAPTERS.find(c => c.id === cid);
+    if (!chap) return;
+    chap.groups.forEach(g => {
+      if(targetGroupId && g.id !== targetGroupId) return;
+      const isKanji = g.id.endsWith('gk') || g.cards.some(c => c.type === 'kanji');
+      if(kanjiOnly && !isKanji) return;
+      if(!kanjiOnly && isKanji) return;
+
+      if(isKanji){
+        g.cards.forEach(card => {
+          if(card.words){
+            card.words.forEach((w, wIdx) => {
+              pool.push({
+                card: { type: 'kanji_item', kanji: w.kanjiText, kana: w.kana, arti: w.id, romaji: w.romaji, parentKanji: card.kanji },
+                groupId: g.id,
+                chapterId: cid,
+                uniqueId: `${g.id}_${card.kanji}_${wIdx}`
+              });
+            });
+          }
+        });
+      } else {
+        g.cards.forEach((card, idx) => pool.push({ card, groupId: g.id, chapterId: cid, uniqueId: `${g.id}_${idx}` }));
+      }
+    });
+  });
+  return pool;
+}
+
+function pickDistractors(pool, target, count){
+  const same = pool.filter(p => p.uniqueId !== target.uniqueId);
+  let cand = shuffleArray(same).slice(0, count);
+  return cand;
+}
+
+const SCOPES = {
+  all_b6: { 
+    label: 'Semua Kosakata Bab 6 (51)', 
+    desc: 'Lengkap 51 kosakata Minna no Nihongo Bab 6', 
+    icon: 'layers', 
+    accent: 'accent-gold', 
+    build: () => collectPool(['bab6'], false) 
+  },
+  verbs_b6: { 
+    label: 'Kata Kerja Bab 6 (11)', 
+    desc: 'たべます、のみます、みます、ききます、dll.', 
+    icon: 'scale', 
+    accent: 'accent-indigo', 
+    build: () => collectPool(['bab6'], false, 'b6_g1') 
+  },
+  food_b6: { 
+    label: 'Makanan & Minuman (18)', 
+    desc: 'ごはん、パン、たまご、にく、おちゃ、dll.', 
+    icon: 'flame', 
+    accent: 'accent-sakura', 
+    build: () => collectPool(['bab6'], false, 'b6_g2') 
+  },
+  obj_b6: { 
+    label: 'Benda, Tempat & Kegiatan (10)', 
+    desc: 'てがみ、しゃしん、みせ、テニス、おはなみ、dll.', 
+    icon: 'target', 
+    accent: 'accent-indigo', 
+    build: () => collectPool(['bab6'], false, 'b6_g3') 
+  },
+  phrase_b6: { 
+    label: 'Keterangan & Percakapan (12)', 
+    desc: 'なに、いっしょに、いつも、いいですね、dll.', 
+    icon: 'clipboard', 
+    accent: 'accent-sakura', 
+    build: () => collectPool(['bab6'], false, 'b6_g4') 
+  }
+};
+const SCOPE_KEYS = ['all_b6', 'verbs_b6', 'food_b6', 'obj_b6', 'phrase_b6'];
+
+function buildMCQuestions(scopeKey){
+  const pool = SCOPES[scopeKey].build();
+  let qs = [];
+  const isKanjiQuiz = scopeKey.startsWith('kanji');
+
+  pool.forEach(item => {
+    if(isKanjiQuiz){
+      const distractors = pickDistractors(pool, item, 3);
+      const options = shuffleArray([item, ...distractors]).map(o => {
+        return { text: o.card.kana, sub: null, correct: o.uniqueId === item.uniqueId };
+      });
+      qs.push({
+        isKanji: true,
+        item, options,
+        promptMain: item.card.kanji,
+        promptSub: null,
+        kanjiGlyph: null
+      });
+    } else {
+      ['jp2id','id2jp'].forEach(dir => {
+        const distractors = pickDistractors(pool, item, 3);
+        const options = shuffleArray([item, ...distractors]).map(o => {
+          return { 
+            text: dir==='jp2id' ? o.card.arti : o.card.kana, 
+            sub: dir==='id2jp' ? o.card.romaji : null, 
+            correct: o.uniqueId === item.uniqueId 
+          };
+        });
+        qs.push({
+          isKanji: false,
+          direction: dir, item, options,
+          promptMain: dir==='jp2id' ? item.card.kana : item.card.arti,
+          promptSub: dir==='jp2id' ? item.card.romaji : null,
+          kanjiGlyph: null
+        });
+      });
+    }
+  });
+  return shuffleArray(qs);
+}
+
+function buildMatchingRounds(scopeKey, roundSize){
+  const pool = shuffleArray(SCOPES[scopeKey].build());
+  const rounds = [];
+  for(let i=0; i<pool.length; i+=roundSize) rounds.push(pool.slice(i, i+roundSize));
+  return rounds;
+}
+
+/* ============================================================
+   APP STATE
+   ============================================================ */
+const state = { 
+  screen: 'home', 
+  chapterId: null, 
+  groupId: null, 
+  cardIndex: 0, 
+  order: null, 
+  shuffled: false, 
+  quiz: null, 
+  bunpouTab: 'b6',
+  reverseMode: safeGet(STORE.reverseMode, false),
+  autoTTS: safeGet(STORE.autoTTS, false)
+};
+const screenEl = document.getElementById('screen');
+
+function playCurrentCardTTS(){
+  if(!state.autoTTS) return;
+  const chap = CHAPTERS.find(c => c.id === state.chapterId);
+  if (!chap) return;
+  const g = chap.groups.find(gr => gr.id === state.groupId);
+  if (!g || !state.order) return;
+  const card = g.cards[state.order[state.cardIndex]];
+  if (card) {
+    if(card.type === 'kanji'){
+      speakKana(card.words.map(w => w.jp).join('、'));
+    } else {
+      speakKana(card.kana);
+    }
+  }
+}
+
+function goHome(){ state.screen = 'home'; state.chapterId = null; state.groupId = null; render(); }
+function goChapter(cid){ state.screen = 'chapter'; state.chapterId = cid; state.groupId = null; render(); }
+function goDeck(cid, gid){
+  state.screen = 'deck'; state.chapterId = cid; state.groupId = gid; state.cardIndex = 0; state.shuffled = false;
+  const chap = CHAPTERS.find(c => c.id === cid);
+  if (chap) {
+    const g = chap.groups.find(gr => gr.id === gid);
+    if (g) state.order = g.cards.map((_,i)=>i);
+  }
+  render();
+  playCurrentCardTTS();
+}
+function goBunpouViewer(tab){ state.screen = 'bunpou'; if(tab) state.bunpouTab = tab; render(); }
+function goTestHub(){ state.screen = 'test-hub'; render(); }
+function goQuizMode(sKey){ state.screen = 'quiz-mode'; state.pendingScope = sKey; render(); }
+
+function startMCQuiz(sKey){
+  state.quiz = { mode:'mc', scopeKey:sKey, questions:buildMCQuestions(sKey), index:0, correct:0, wrong:0, answered:false };
+  state.screen = 'quiz-play';
+  render();
+}
+function startMatchQuiz(sKey){
+  const rounds = buildMatchingRounds(sKey, 5);
+  state.quiz = { mode:'match', scopeKey:sKey, rounds, roundIndex:0, leftOrder:null, rightOrder:null, matched:new Set(), selected:null, mistakes:0, roundsCleared:0 };
+  setupMatchRound();
+  state.screen = 'quiz-play';
+  render();
+}
+function setupMatchRound(){
+  const q = state.quiz;
+  const round = q.rounds[q.roundIndex];
+  q.leftOrder = shuffleArray(round.map((_,i)=>i));
+  q.rightOrder = shuffleArray(round.map((_,i)=>i));
+  q.matched = new Set();
+  q.selected = null;
+}
+function exitQuiz(){
+  if(state.quiz && !state.quiz.finished){
+    if(!confirm('Yakin ingin mengakhiri latihan? Skor belum tersimpan.')) return;
+  }
+  state.quiz = null;
+  state.screen = 'test-hub';
+  render();
+}
+
+/* ============================================================
+   RENDER: HOME
+   ============================================================ */
+function renderHome(){
+  const streak = safeGet(STORE.streak, 1);
+  const learned = learnedCountAll();
+  const total = totalCardsAll();
+
+  let chapHtml = '';
+  CHAPTERS.forEach(c => {
+    const t = totalCardsInChapter(c);
+    const l = learnedCountInChapter(c);
+    const pct = t ? Math.round((l/t)*100) : 0;
+    chapHtml += `
+      <button class="bento bab-tile ${c.accent}" data-open-chapter="${c.id}">
+        <span class="glow"></span>
+        <span class="emblem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon(c.icon)}</svg></span>
+        <span class="eyebrow">BAB ${c.number} · MINNA NO NIHONGO</span>
+        <div class="bab-title">${c.title}</div>
+        <div class="bab-desc">${c.desc}</div>
+        <div class="bab-meta">
+          <div><div class="meta-num">${c.groups.length}</div><div class="meta-label">Kelompok</div></div>
+          <div><div class="meta-num">${t}</div><div class="meta-label">Total Kartu</div></div>
+          <div><div class="meta-num">${pct}%</div><div class="meta-label">Dipelajari</div></div>
+        </div>
+        <div class="bab-progress">
+          <div class="progress-bar"><span style="width:${pct}%"></span></div>
+        </div>
+      </button>`;
+  });
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="bento-grid">
+        <div class="bento stat-tile">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('flame')}</svg></div>
+          <div class="num">${streak}<span class="unit">hari</span></div>
+          <div class="cap">Hari Beruntun Belajar</div>
+        </div>
+        <div class="bento stat-tile learned">
+          <div class="icon-wrap"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('target')}</svg></div>
+          <div class="num">${learned}<span class="unit">/ ${total}</span></div>
+          <div class="cap">Kartu Dipelajari</div>
+        </div>
+      </div>
+
+      <div class="section-label">Modul Tata Bahasa (Bunpou)</div>
+      <button class="bento bab-tile bunpou-cta" id="openBunpou">
+        <span class="glow"></span>
+        <span class="emblem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('scroll')}</svg></span>
+        <span class="eyebrow">BUNPOU · TATA BAHASA</span>
+        <div class="bab-title">Pola Kalimat Bab 6</div>
+        <div class="bab-desc">8 pola tata bahasa lengkap: Objek を, Kegiatan を します, なにを しますか, Perbedaan なん &amp; なに, Tempat で, Ajakan ませんか &amp; ましょう, serta Konfirmasi ～か.</div>
+        <div class="bab-meta">
+          <div><div class="meta-num">8 Pola</div><div class="meta-label">Materi Lengkap</div></div>
+          <div><div class="meta-num">Hiragana</div><div class="meta-label">Mudah Dibaca</div></div>
+          <div><div class="meta-num">+Kaiwa</div><div class="meta-label">Percakapan</div></div>
+        </div>
+      </button>
+
+      <div class="section-label">Pilih Bab Flashcard</div>
+      ${chapHtml}
+
+      <div class="section-label">Latihan &amp; Tes</div>
+      <button class="bento bab-tile test-cta" id="openTestHub">
+        <span class="glow"></span>
+        <span class="emblem"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('clipboard')}</svg></span>
+        <span class="eyebrow">UJI PEMAHAMAN</span>
+        <div class="bab-title">Mulai Latihan Soal</div>
+        <div class="bab-desc">Pilihan ganda &amp; pasangan kata untuk menguji hafalan kosakata dan arti Bab 6 Minna no Nihongo.</div>
+        <div class="bab-meta">
+          <div><div class="meta-num">5</div><div class="meta-label">Cakupan Soal</div></div>
+          <div><div class="meta-num">2</div><div class="meta-label">Metode Kuis</div></div>
+        </div>
+      </button>
+
+      <button class="reset-link" id="resetProgress" type="button">Setel ulang progres belajar</button>
+    </div>`;
+}
+
+/* ============================================================
+   RENDER: CHAPTER (SUB-KELOMPOK)
+   ============================================================ */
+function renderChapter(cid){
+  const chap = CHAPTERS.find(c => c.id === cid);
+  if (!chap) { goHome(); return; }
+
+  let rows = '';
+  chap.groups.forEach(g => {
+    const l = learnedCountInGroup(g);
+    const t = totalCardsInGroup(g);
+    const done = l === t && t > 0;
+    rows += `
+      <button class="group-row ${g.accent}" data-open-deck="${g.id}">
+        <span class="g-icon ${g.accent}"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon(g.icon)}</svg></span>
+        <span class="g-body">
+          <span class="g-title">${g.title}</span>
+          <span class="g-desc">${g.desc}</span>
+          <span class="g-tags">
+            <span class="g-tag page-tag">${g.page}</span>
+            <span class="g-tag">${t} kartu</span>
+            <span class="g-tag ${done ? 'done' : ''}">${l}/${t} dipelajari</span>
+          </span>
+        </span>
+        <span class="g-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevRight')}</svg></span>
+      </button>`;
+  });
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="back-row">
+        <button class="back-btn" id="backHome"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
+        <div class="crumb">
+          <span class="eyebrow">BAB ${chap.number}</span>
+          <span class="crumb-title">${chap.title}</span>
+        </div>
+      </div>
+      <div class="section-label">Pilih Kelompok Kartu</div>
+      ${rows}
+    </div>`;
+}
+
+/* ============================================================
+   RENDER: DECK (FLASHCARD)
+   ============================================================ */
+function renderCardFace(card, kat, pageStr){
+  if(card.type === 'kanji'){
+    const wordsHtml = card.words.map(w => `
+      <div class="kanji-word-item">
+        <span class="kanji-word-jp">${w.jp}</span>
+        <span class="kanji-word-id">${w.id}</span>
+      </div>
+    `).join('');
+
+    const wordsMeaningStr = card.words.map(w => w.id).join(' / ');
+
+    if(state.reverseMode){
+      const front = `
+        <div class="face-top">
+          <div class="face-top-left"><span class="badge sakura">Arti Kanji · ${pageStr}</span><span class="learned-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span></div>
+          <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+        </div>
+        <div class="face-mid" style="text-align:center;">
+          <span class="arti-label">Makna / Kosakata Terkait</span>
+          <span class="arti-text" style="font-size:15px;margin-top:4px;">${wordsMeaningStr}</span>
+        </div>
+        <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk melihat kanji &amp; cara baca</span></div>`;
+
+      const back = `
+        <div class="face-top">
+          <span class="badge blue">Kanji ${card.kanji} · ${pageStr}</span>
+          <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+        </div>
+        <div class="face-mid" style="text-align:left;padding:0 2px;width:100%;">
+          <div class="kanji-word-list">${wordsHtml}</div>
+        </div>
+        <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk kembali</span></div>`;
+      return { front, back };
+    }
+
+    const front = `
+      <div class="face-top">
+        <div class="face-top-left"><span class="badge sakura">Kanji Harian · ${pageStr}</span><span class="learned-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span></div>
+        <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+      </div>
+      <div class="face-mid"><span class="kanji-display">${card.kanji}</span></div>
+      <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk melihat contoh &amp; arti</span></div>`;
+
+    const back = `
+      <div class="face-top">
+        <span class="badge blue">Kanji ${card.kanji} · ${pageStr}</span>
+        <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+      </div>
+      <div class="face-mid" style="text-align:left;padding:0 2px;width:100%;">
+        <div class="kanji-word-list">${wordsHtml}</div>
+      </div>
+      <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk kembali</span></div>`;
+    return { front, back };
+  }
+
+  // Vocab card
+  const romajiHtml = card.romaji ? `<span class="kana-romaji">${card.romaji}</span>` : '';
+
+  if(state.reverseMode){
+    const front = `
+      <div class="face-top">
+        <div class="face-top-left"><span class="badge sakura">Arti · ${pageStr}</span><span class="learned-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span></div>
+        <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+      </div>
+      <div class="face-mid"><span class="arti-label">Bahasa Indonesia</span><span class="arti-text" style="font-size:18px;">${card.arti}</span></div>
+      <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk lihat bahasa Jepang</span></div>`;
+    
+    const back = `
+      <div class="face-top">
+        <span class="badge blue">${card.arti}</span>
+        <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+      </div>
+      <div class="face-mid"><span class="kana-word">${card.kana}</span>${romajiHtml}</div>
+      <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk kembali</span></div>`;
+    return { front, back };
+  }
+
+  const front = `
+    <div class="face-top">
+      <div class="face-top-left"><span class="badge">${kat} · ${pageStr}</span><span class="learned-badge"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span></div>
+      <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+    </div>
+    <div class="face-mid"><span class="kana-word">${card.kana}</span>${romajiHtml}</div>
+    <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk lihat arti</span></div>`;
+  const back = `
+    <div class="face-top">
+      <span class="badge blue">${card.kana}${card.romaji ? ` · ${card.romaji}` : ''}</span>
+      <button class="sound-btn" type="button" aria-label="Audio" style="width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--card-bg-soft);border:1px solid var(--card-border);cursor:pointer;"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:11px;height:11px;stroke:var(--ink-soft);">${icon('speaker')}</svg></button>
+    </div>
+    <div class="face-mid"><span class="arti-label">Arti</span><span class="arti-text">${card.arti}</span></div>
+    <div class="face-bottom"><span class="flip-hint"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Ketuk untuk kembali</span></div>`;
+  return { front, back };
+}
+
+function renderDeck(cid, gid){
+  const chap = CHAPTERS.find(c => c.id === cid);
+  if (!chap) { goHome(); return; }
+  const g = chap.groups.find(gr => gr.id === gid);
+  if (!g) { goChapter(cid); return; }
+
+  if(!state.order || state.order.length === 0) state.order = g.cards.map((_,i)=>i);
+  if (state.cardIndex >= state.order.length) state.cardIndex = 0;
+
+  const idx = state.cardIndex;
+  const actualIdx = state.order[idx];
+  const card = g.cards[actualIdx];
+  if (!card) { state.cardIndex = 0; render(); return; }
+
+  const uid = cardUid(g.id, actualIdx);
+  const isLearned = learnedSet.has(uid);
+  const isExcluded = excludedSet.has(uid);
+  const learnedCount = learnedCountInGroup(g);
+  const total = state.order.length;
+  const faces = renderCardFace(card, g.kategori, g.page);
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="back-row">
+        <button class="back-btn" id="backChapter"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
+        <div class="crumb">
+          <span class="eyebrow">${chap.title}</span>
+          <span class="crumb-title">${g.title}</span>
+        </div>
+      </div>
+
+      <div class="bento meta-bar">
+        <div class="meta-left">
+          <span class="meta-cat">${g.kategori} · ${g.title}</span>
+          <span class="meta-page">${g.page}</span>
+        </div>
+        <div class="meta-right">
+          <span class="meta-count">${learnedCount} / ${g.cards.length} dipelajari</span>
+          <div class="progress-bar"><span style="width:${g.cards.length ? (learnedCount/g.cards.length)*100 : 0}%"></span></div>
+        </div>
+      </div>
+
+      <div class="flashcard ${isLearned ? 'is-learned' : ''} ${isExcluded ? 'is-excluded' : ''}" id="activeCard">
+        <button class="exclude-btn ${isExcluded ? 'is-excluded' : ''}" id="excludeCard" title="Tandai dihafal">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon(isExcluded ? 'check' : 'archive')}</svg>
+        </button>
+        <div class="flashcard-inner">
+          <div class="face front">${faces.front}</div>
+          <div class="face back">${faces.back}</div>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn" id="prevCard" ${idx===0?'disabled':''}><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg>Sebelumnya</button>
+        <button class="shuffle-btn ${state.shuffled ? 'is-active' : ''}" id="shuffleDeck" title="Acak kartu"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('shuffle')}</svg></button>
+        <button class="nav-btn primary" id="nextCard" ${idx===total-1?'disabled':''}>Selanjutnya<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevRight')}</svg></button>
+      </div>
+      <div class="deck-count">KARTU ${idx+1} DARI ${total}${state.shuffled ? ' · TERACAK' : ''}</div>
+
+      <!-- SAKLAR KONTROL -->
+      <div class="deck-controls">
+        <div class="control-toggle-card">
+          <div class="control-label">
+            <span class="control-icon sakura"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('swap')}</svg></span>
+            <div class="control-text">
+              <div class="control-title">Balik Kartu (Indonesia → Jepang)</div>
+              <div class="control-sub">Tampilkan arti bahasa Indonesia di depan</div>
+            </div>
+          </div>
+          <button class="switch-btn ${state.reverseMode ? 'is-active' : ''}" id="toggleReverse" role="switch" aria-checked="${state.reverseMode}">
+            <span class="switch-knob"></span>
+          </button>
+        </div>
+
+        <div class="control-toggle-card">
+          <div class="control-label">
+            <span class="control-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('speaker')}</svg></span>
+            <div class="control-text">
+              <div class="control-title">Audio Otomatis (Auto TTS)</div>
+              <div class="control-sub">Otomatis putar suara saat berpindah kartu</div>
+            </div>
+          </div>
+          <button class="switch-btn ${state.autoTTS ? 'is-active' : ''}" id="toggleAutoTTS" role="switch" aria-checked="${state.autoTTS}">
+            <span class="switch-knob"></span>
+          </button>
+        </div>
+      </div>
+    </div>`;
+}
+
+/* ============================================================
+   RENDER: BUNPOU VIEWER (8 POLA TATA BAHASA LENGKAP BAB 6)
+   ============================================================ */
+function renderBunpou(){
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="back-row">
+        <button class="back-btn" id="backHome"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
+        <div class="crumb">
+          <span class="eyebrow">TATA BAHASA (BUNPOU)</span>
+          <span class="crumb-title">Modul Lengkap Bab 6</span>
+        </div>
+      </div>
+
+      <!-- POLA 1 -->
+      <div class="bento bunpou-card accent-indigo">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 01 · BAB 6</span><div class="bunpou-title">1. Objek Langsung: Kata Benda を Kata Kerja</div></div>
+          <span class="badge blue">Objek Langsung</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Kata Benda</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill sakura">を (o)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill blue">Kata Kerja</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Partikel <strong>を (o)</strong> digunakan untuk menunjukkan <strong>objek langsung</strong> dari suatu kata kerja transitif.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">ジュースを のみます。</span>
+            <span class="jp-romaji">Juusu o nomimasu.</span>
+            <span class="jp-arti">Minum jus.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">ごはんを たべます。</span>
+            <span class="jp-romaji">Gohan o tabemasu.</span>
+            <span class="jp-arti">Makan nasi.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">てがみを かきます。</span>
+            <span class="jp-romaji">Tegami o kakimasu.</span>
+            <span class="jp-arti">Menulis surat.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 2 -->
+      <div class="bento bunpou-card accent-gold">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 02 · BAB 6</span><div class="bunpou-title">2. Melakukan Kegiatan: Kata Benda を します</div></div>
+          <span class="badge">Melakukan Kegiatan</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Kata Benda</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill sakura">を</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill blue">します</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">
+          Kata kerja <strong>します</strong> (melakukan/mengerjakan) dapat digabungkan dengan berbagai kata benda:
+          <ul>
+            <li><strong>Olahraga / Permainan:</strong> サッカーを します (bermain sepak bola), トランプを します (bermain kartu).</li>
+            <li><strong>Acara / Pertemuan:</strong> パーティーを します (berpesta), かいぎを します (mengadakan rapat).</li>
+            <li><strong>Pekerjaan / Tugas:</strong> しゅくだいを します (mengerjakan PR), しごとを します (bekerja), でんわを します (menelepon).</li>
+          </ul>
+        </div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">サッカーを します。</span>
+            <span class="jp-romaji">Sakkaa o shimasu.</span>
+            <span class="jp-arti">Bermain sepak bola.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">しゅくだいを します。</span>
+            <span class="jp-romaji">Shukudai o shimasu.</span>
+            <span class="jp-arti">Mengerjakan PR.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">パーティーを します。</span>
+            <span class="jp-romaji">Paatii o shimasu.</span>
+            <span class="jp-arti">Mengadakan pesta.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 3 -->
+      <div class="bento bunpou-card accent-sakura">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 03 · BAB 6</span><div class="bunpou-title">3. Menanyakan Kegiatan: なにを しますか</div></div>
+          <span class="badge sakura">Tanya Aktivitas</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill blue">[Waktu]</span>
+            <span class="formula-pill gold">なにを しますか (Sekarang / Nanti)</span>
+            <span class="formula-op">/</span>
+            <span class="formula-pill sakura">なにを しましたか (Lampau)</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Digunakan untuk menanyakan aktivitas yang sedang, akan, atau telah dilakukan seseorang.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">げつようび なにを しますか。……きょうとへ いきます。</span>
+            <span class="jp-romaji">Getsuyoubi nani o shimasu ka. ...Kyouto e ikimasu.</span>
+            <span class="jp-arti">Hari Senin melakukan apa? ...Pergi ke Kyoto.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">きのう なにを しましたか。……サッカーを しました。</span>
+            <span class="jp-romaji">Kinou nani o shimashita ka. ...Sakkaa o shimashita.</span>
+            <span class="jp-arti">Kemarin melakukan apa? ...Bermain sepak bola.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 4 -->
+      <div class="bento bunpou-card accent-indigo">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 04 · BAB 6</span><div class="bunpou-title">4. Perbedaan なん (nan) dan なに (nani)</div></div>
+          <span class="badge blue">Penggunaan "Apa"</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">なん + Baris た, だ, な (です, の)</span>
+            <span class="formula-pill gold">なん + Satuan Bilangan</span>
+            <span class="formula-pill gold">なんで (Alat/Alasan)</span>
+          </div>
+          <div class="formula-row" style="margin-top:3px;">
+            <span class="formula-pill sakura">なに + Partikel を / Mandiri</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">
+          Keduanya berarti "apa", tetapi penggunaannya dibedakan berdasarkan kata setelahnya:
+          <ul>
+            <li><strong>Gunakan なん:</strong> Di depan bunyi baris <em>ta, da, na</em> (seperti <em>です</em>, <em>の</em>), diikuti kata bantu bilangan (umur, jam, dsb.), dan pada frasa <em>なんで</em> (sarana/alat atau alasan).</li>
+            <li><strong>Gunakan なに:</strong> Selain kondisi di atas (misalnya berdiri sendiri atau diikuti partikel <em>を</em>).</li>
+          </ul>
+        </div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">それは なん ですか。</span>
+            <span class="jp-romaji">Sore wa nan desu ka.</span>
+            <span class="jp-arti">Itu apa? (Diikuti です - baris だ)</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">なんの ほん ですか。</span>
+            <span class="jp-romaji">Nan no hon desu ka.</span>
+            <span class="jp-arti">Buku apa? (Diikuti の - baris な)</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">なんさい ですか。</span>
+            <span class="jp-romaji">Nansai desu ka.</span>
+            <span class="jp-arti">Umur berapa? (Diikuti kata bantu bilangan)</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">なんで とうきょうへ いきますか。</span>
+            <span class="jp-romaji">Nande Toukyou e ikimasu ka.</span>
+            <span class="jp-arti">Dengan apa pergi ke Tokyo? (Menanyakan sarana transportasi)</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">なにを かいますか。</span>
+            <span class="jp-romaji">Nani o kaimasu ka.</span>
+            <span class="jp-arti">Mau membeli apa? (Diikuti partikel を)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 5 -->
+      <div class="bento bunpou-card accent-gold">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 05 · BAB 6</span><div class="bunpou-title">5. Tempat Keterangan Aksi: Tempat で Kata Kerja</div></div>
+          <span class="badge">Lokasi Aksi</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill blue">Kata Benda (Tempat)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill gold">で (de)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill sakura">Kata Kerja</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Partikel <strong>で (de)</strong> diletakkan di belakang kata tempat untuk menunjukkan <strong>lokasi dilakukannya suatu kegiatan atau perbuatan</strong>.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">えきで しんぶんを かいます。</span>
+            <span class="jp-romaji">Eki de shinbun o kaimasu.</span>
+            <span class="jp-arti">Membeli surat kabar di stasiun.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">レストランで ごはんを たべます。</span>
+            <span class="jp-romaji">Resutoran de gohan o tabemasu.</span>
+            <span class="jp-arti">Makan nasi di restoran.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">にわで しゃしんを とります。</span>
+            <span class="jp-romaji">Niwa de shashin o torimasu.</span>
+            <span class="jp-arti">Mengambil foto di halaman.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 6 -->
+      <div class="bento bunpou-card accent-sakura">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 06 · BAB 6</span><div class="bunpou-title">6. Ajakan Halus / Menawari: Kata Kerja ませんか</div></div>
+          <span class="badge sakura">Ajakan Sopan</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Kata Kerja (Bentuk ます - buang ます)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill sakura">ませんか</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Digunakan untuk mengundang atau mengajak lawan bicara secara sopan ("Bagaimana kalau...? / Maukah...?"). Memberikan ruang bagi lawan bicara untuk menolak secara halus.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">いっしょに きょうとへ いきませんか。……ええ、いいですね。</span>
+            <span class="jp-romaji">Isshoni Kyouto e ikimasen ka. ...Ee, ii desu ne.</span>
+            <span class="jp-arti">Bagaimana kalau kita pergi ke Kyoto bersama-sama? ...Ya, bagus ya.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">いっしょに ひるごはんを たべませんか。</span>
+            <span class="jp-romaji">Isshoni hirugohan o tabemasen ka.</span>
+            <span class="jp-arti">Maukah makan siang bersama?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 7 -->
+      <div class="bento bunpou-card accent-indigo">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 07 · BAB 6</span><div class="bunpou-title">7. Ajakan Aktif / Menanggapi: Kata Kerja ましょう</div></div>
+          <span class="badge blue">Ajakan Aktif</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill gold">Kata Kerja (Bentuk ます - buang ます)</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill blue">ましょう</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Digunakan untuk <strong>mengajak secara aktif</strong> ("Mari kita...") atau menyetujui ajakan dari lawan bicara ("Ayo lakukan").</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">ちょっと やすみましょう。</span>
+            <span class="jp-romaji">Chotto yasumimashou.</span>
+            <span class="jp-arti">Mari kita istirahat sebentar.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">いっしょに ひるごはんを たべませんか。……ええ、たべましょう。</span>
+            <span class="jp-romaji">Isshoni hirugohan o tabemasen ka. ...Ee, tabemashou.</span>
+            <span class="jp-arti">Bagaimana kalau makan siang bersama? ...Ya, ayo kita makan.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- POLA 8 -->
+      <div class="bento bunpou-card accent-gold">
+        <div class="bunpou-header">
+          <div><span class="eyebrow">POLA 08 · BAB 6</span><div class="bunpou-title">8. Konfirmasi Informasi Baru: ～か</div></div>
+          <span class="badge">Konfirmasi</span>
+        </div>
+        <div class="formula-container">
+          <div class="formula-row">
+            <span class="formula-pill blue">[Informasi Baru]</span>
+            <span class="formula-op">+</span>
+            <span class="formula-pill gold">ですか / か</span>
+          </div>
+        </div>
+        <div class="bunpou-desc">Partikel <strong>か</strong> di akhir kalimat tanggapan digunakan ketika mengulangi informasi baru yang baru saja didengar untuk mengonfirmasi dan memahaminya.</div>
+        <div class="bunpou-examples">
+          <div class="example">
+            <span class="jp-ex">にちようび きょうとへ いきました。……きょうとですか。いいですね。</span>
+            <span class="jp-romaji">Nichiyoubi Kyouto e ikimashita. ...Kyouto desu ka. Ii desu ne.</span>
+            <span class="jp-arti">Hari Minggu lalu saya pergi ke Kyoto. ...Ke Kyoto? Bagus ya.</span>
+          </div>
+          <div class="example">
+            <span class="jp-ex">あしたは ともだちと テニスを します。……テニスですか。</span>
+            <span class="jp-romaji">Ashita wa tomodachi to tenisu o shimasu. ...Tenisu desu ka.</span>
+            <span class="jp-arti">Besok saya bermain tenis dengan teman. ...Tenis ya?</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- KAIWA BAB 6 -->
+      <div class="kaiwa-box">
+        <div class="kaiwa-title"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" style="width:15px;height:15px;stroke:var(--accent-indigo);">${icon('speaker')}</svg> かいわ (Percakapan Bab 6: いっしょに いきませんか)</div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">サトウ:</div><div class="kaiwa-body"><div class="kaiwa-jp">ミラーさん、あした いっしょに おはなみを しませんか。</div><div class="kaiwa-romaji">Miraa-san, ashita isshoni ohanami o shimasen ka.</div><div class="kaiwa-id">Tuan Miller, maukah besok pergi menikmati bunga sakura bersama?</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">ミラー:</div><div class="kaiwa-body"><div class="kaiwa-jp">いいですね。どこへ いきますか。</div><div class="kaiwa-romaji">Ii desu ne. Doko e ikimasu ka.</div><div class="kaiwa-id">Bagus ya / ide yang menyenangkan. Mau pergi ke mana?</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">サトウ:</div><div class="kaiwa-body"><div class="kaiwa-jp">おおさかじょうこうえんへ いきましょう。じゅういちじに えきで あいましょう。</div><div class="kaiwa-romaji">Oosakajou kouen e ikimashou. Juuichi-ji ni eki de aimashou.</div><div class="kaiwa-id">Ayo pergi ke Taman Kastil Osaka. Mari bertemu di stasiun jam 11.</div></div></div>
+        <div class="kaiwa-item"><div class="kaiwa-speaker">ミラー:</div><div class="kaiwa-body"><div class="kaiwa-jp">わかりました。じゃ、また あした。</div><div class="kaiwa-romaji">Wakarimashita. Jaa, mata ashita.</div><div class="kaiwa-id">Baiklah, mengerti. Sampai jumpa besok.</div></div></div>
+      </div>
+    </div>`;
+}
+
+/* ============================================================
+   RENDER: TEST HUB & QUIZ MODES
+   ============================================================ */
+function renderTestHub(){
+  let rows = '';
+  SCOPE_KEYS.forEach(key => {
+    const s = SCOPES[key];
+    const total = s.build().length;
+    rows += `
+      <button class="group-row ${s.accent}" data-open-quiz-mode="${key}">
+        <span class="g-icon ${s.accent}"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon(s.icon)}</svg></span>
+        <span class="g-body">
+          <span class="g-title">${s.label}</span>
+          <span class="g-desc">${s.desc}</span>
+          <span class="g-tags"><span class="g-tag">${total} butir soal</span></span>
+        </span>
+        <span class="g-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevRight')}</svg></span>
+      </button>`;
+  });
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="back-row">
+        <button class="back-btn" id="backHome"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
+        <div class="crumb">
+          <span class="eyebrow">LATIHAN &amp; TES</span>
+          <span class="crumb-title">Pilih Cakupan Soal</span>
+        </div>
+      </div>
+      <div class="section-label">5 Cakupan Latihan Soal Bab 6</div>
+      ${rows}
+    </div>`;
+}
+
+function renderQuizMode(){
+  const s = SCOPES[state.pendingScope];
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="back-row">
+        <button class="back-btn" id="backTestHub"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevLeft')}</svg></button>
+        <div class="crumb">
+          <span class="eyebrow">Latihan</span>
+          <span class="crumb-title">${s.label}</span>
+        </div>
+      </div>
+      <div class="section-label">Pilih Metode Latihan</div>
+      <button class="mode-card" data-start-mc="${state.pendingScope}">
+        <span class="m-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('target')}</svg></span>
+        <span class="m-body">
+          <span class="m-title">Pilihan Ganda</span>
+          <span class="m-desc">Soal bolak-balik Jepang ↔ Indonesia, 4 pilihan</span>
+        </span>
+        <span class="g-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevRight')}</svg></span>
+      </button>
+      <button class="mode-card mode-match" data-start-match="${state.pendingScope}">
+        <span class="m-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('link')}</svg></span>
+        <span class="m-body">
+          <span class="m-title">Pasangan Jawaban</span>
+          <span class="m-desc">Cocokkan kata Jepang dan artinya per ronde 5 pasang</span>
+        </span>
+        <span class="g-chevron"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('chevRight')}</svg></span>
+      </button>
+    </div>`;
+}
+
+function renderQuizPlay(){
+  if(state.quiz.mode === 'mc') renderQuizMC();
+  else if(state.quiz.mode === 'match') renderQuizMatch();
+}
+
+function quizHeaderHtml(title, sub){
+  const q = state.quiz;
+  return `
+    <div class="back-row">
+      <button class="back-btn" id="exitQuiz"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('close')}</svg></button>
+      <div class="crumb">
+        <span class="eyebrow">${sub}</span>
+        <span class="crumb-title">${title}</span>
+      </div>
+      <div style="display:flex;gap:5px;">
+        <span class="score-chip correct">${q.correct !== undefined ? q.correct : q.roundsCleared}</span>
+        <span class="score-chip wrong">${q.wrong !== undefined ? q.wrong : q.mistakes}</span>
+      </div>
+    </div>`;
+}
+
+function renderQuizMC(){
+  const q = state.quiz;
+  if(q.index >= q.questions.length){ renderQuizResult(); return; }
+  const question = q.questions[q.index];
+  const s = SCOPES[q.scopeKey];
+  
+  let dirLabel = question.direction === 'jp2id' ? 'Jepang → Indonesia' : 'Indonesia → Jepang';
+  const promptQuestionTitle = question.direction === 'jp2id' ? 'Apa artinya?' : 'Bahasa Jepangnya apa?';
+
+  const optsHtml = question.options.map((opt, i) => `
+    <button class="quiz-option" data-mc-option="${i}">
+      <span><span>${opt.text}</span>${opt.sub ? `<span style="display:block;font-size:10px;color:var(--ink-faint);margin-top:1px;">${opt.sub}</span>` : ''}</span>
+      <span class="opt-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">${icon('check')}</svg></span>
+    </button>`).join('');
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      ${quizHeaderHtml(s.label, dirLabel)}
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:var(--ink-faint);margin-bottom:4px;">
+          <span>SOAL ${q.index+1} DARI ${q.questions.length}</span>
+        </div>
+        <div class="progress-bar"><span style="width:${(q.index/q.questions.length)*100}%"></span></div>
+      </div>
+      <div class="bento quiz-question">
+        <span style="font-size:9.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);display:block;margin-bottom:6px;">${promptQuestionTitle}</span>
+        <div style="font-size:20px;font-weight:900;line-height:1.25;">${question.promptMain}</div>
+        ${question.promptSub ? `<div style="font-size:11.5px;color:var(--accent-sakura-deep);font-weight:600;margin-top:3px;">${question.promptSub}</div>` : ''}
+      </div>
+      <div id="quizOptions">${optsHtml}</div>
+    </div>`;
+}
+
+function renderQuizMatch(){
+  const q = state.quiz;
+  const round = q.rounds[q.roundIndex];
+  const s = SCOPES[q.scopeKey];
+
+  function tileClass(side, i){
+    if(q.matched.has(i)) return 'is-correct';
+    if(q.selected && q.selected.side===side && q.selected.idx===i) return 'is-selected';
+    if(q.wrongFlash && ((q.wrongFlash.a.side===side && q.wrongFlash.a.idx===i) || (q.wrongFlash.b.side===side && q.wrongFlash.b.idx===i))) return 'is-wrong';
+    return '';
+  }
+
+  const leftHtml = q.leftOrder.map(i => {
+    const item = round[i];
+    return `<button class="match-tile ${tileClass('left',i)}" data-match-side="left" data-match-idx="${i}" ${q.matched.has(i)?'disabled':''}><span>${item.card.kana}</span></button>`;
+  }).join('');
+
+  const rightHtml = q.rightOrder.map(i => {
+    const item = round[i];
+    return `<button class="match-tile ${tileClass('right',i)}" data-match-side="right" data-match-idx="${i}" ${q.matched.has(i)?'disabled':''}>${item.card.arti}</button>`;
+  }).join('');
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      ${quizHeaderHtml(s.label, 'Pasangan Jawaban')}
+      <div style="margin-bottom:12px;">
+        <div style="display:flex;justify-content:space-between;font-size:10px;font-weight:600;color:var(--ink-faint);margin-bottom:4px;">
+          <span>RONDE ${q.roundIndex+1} DARI ${q.rounds.length}</span>
+        </div>
+        <div class="progress-bar"><span style="width:${(q.roundIndex/q.rounds.length)*100}%"></span></div>
+      </div>
+      <div class="match-columns">
+        <div class="match-col">${leftHtml}</div>
+        <div class="match-col">${rightHtml}</div>
+      </div>
+    </div>`;
+}
+
+function renderQuizResult(){
+  const q = state.quiz;
+  q.finished = true;
+  let scoreBig, scoreLabel;
+  if(q.mode === 'match'){
+    scoreBig = q.rounds.length;
+    scoreLabel = `${q.rounds.length} Ronde Selesai (${q.mistakes} kesalahan)`;
+  } else {
+    const pct = Math.round((q.correct/q.questions.length)*100);
+    scoreBig = pct + '%';
+    scoreLabel = `${q.correct} benar dari ${q.questions.length} soal`;
+  }
+
+  screenEl.innerHTML = `
+    <div class="screen-inner">
+      <div class="bento result-card">
+        <div class="r-icon"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${icon('trophy')}</svg></div>
+        <div class="r-score">${scoreBig}</div>
+        <div style="font-size:12px;color:var(--ink-soft);margin-top:6px;">${scoreLabel}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:8px;margin-top:16px;">
+        <button class="nav-btn primary" id="retryQuiz">Ulangi Latihan</button>
+        <button class="nav-btn" id="backTestHubFromResult">Kembali ke Menu Latihan</button>
+      </div>
+    </div>`;
+}
+
+/* ============================================================
+   EVENT DELEGATION
+   ============================================================ */
+function render(){
+  if(state.screen === 'home') renderHome();
+  else if(state.screen === 'chapter') renderChapter(state.chapterId);
+  else if(state.screen === 'deck') renderDeck(state.chapterId, state.groupId);
+  else if(state.screen === 'bunpou') renderBunpou();
+  else if(state.screen === 'test-hub') renderTestHub();
+  else if(state.screen === 'quiz-mode') renderQuizMode();
+  else if(state.screen === 'quiz-play') renderQuizPlay();
+}
+
+screenEl.addEventListener('click', (e)=>{
+  const openChap = e.target.closest('[data-open-chapter]');
+  if(openChap){ goChapter(openChap.getAttribute('data-open-chapter')); return; }
+
+  const openDeck = e.target.closest('[data-open-deck]');
+  if(openDeck){ goDeck(state.chapterId, openDeck.getAttribute('data-open-deck')); return; }
+
+  const openQuizMode = e.target.closest('[data-open-quiz-mode]');
+  if(openQuizMode){ goQuizMode(openQuizMode.getAttribute('data-open-quiz-mode')); return; }
+
+  if(e.target.closest('#openBunpou')){ goBunpouViewer(); return; }
+  if(e.target.closest('#openTestHub')){ goTestHub(); return; }
+  if(e.target.closest('#backTestHub')){ goTestHub(); return; }
+  if(e.target.closest('#backTestHubFromResult')){ goTestHub(); return; }
+  if(e.target.closest('#exitQuiz')){ exitQuiz(); return; }
+
+  const startMc = e.target.closest('[data-start-mc]');
+  if(startMc){ startMCQuiz(startMc.getAttribute('data-start-mc')); return; }
+
+  const startMatch = e.target.closest('[data-start-match]');
+  if(startMatch){ startMatchQuiz(startMatch.getAttribute('data-start-match')); return; }
+
+  if(e.target.closest('#retryQuiz')){
+    if(state.quiz.mode === 'mc') startMCQuiz(state.quiz.scopeKey);
+    else startMatchQuiz(state.quiz.scopeKey);
+    return;
+  }
+
+  const mcOpt = e.target.closest('[data-mc-option]');
+  if(mcOpt){
+    const q = state.quiz;
+    if(q.answered) return;
+    q.answered = true;
+    const optIdx = parseInt(mcOpt.getAttribute('data-mc-option'), 10);
+    const question = q.questions[q.index];
+    const chosen = question.options[optIdx];
+    screenEl.querySelectorAll('[data-mc-option]').forEach((btn, i) => {
+      btn.classList.add('is-disabled');
+      if(question.options[i].correct) btn.classList.add('is-correct');
+      else if(i === optIdx) btn.classList.add('is-wrong');
+    });
+    if(chosen.correct) q.correct++; else q.wrong++;
+    setTimeout(() => { q.index++; q.answered = false; renderQuizPlay(); }, 850);
+    return;
+  }
+
+  const matchTile = e.target.closest('[data-match-side]');
+  if(matchTile && !matchTile.disabled){
+    const q = state.quiz;
+    if(q.wrongFlash) return;
+    const side = matchTile.getAttribute('data-match-side');
+    const idx = parseInt(matchTile.getAttribute('data-match-idx'), 10);
+
+    if(!q.selected || q.selected.side === side){ q.selected = {side, idx}; renderQuizMatch(); return; }
+
+    const prev = q.selected;
+    if(prev.idx === idx){
+      q.matched.add(idx);
+      q.selected = null;
+      renderQuizMatch();
+      if(q.matched.size === q.rounds[q.roundIndex].length){
+        setTimeout(()=>{
+          q.roundIndex++;
+          q.roundsCleared = q.roundIndex;
+          if(q.roundIndex >= q.rounds.length) renderQuizResult();
+          else { setupMatchRound(); renderQuizPlay(); }
+        }, 500);
+      }
+    } else {
+      q.mistakes++;
+      q.wrongFlash = { a: prev, b: {side, idx} };
+      q.selected = null;
+      renderQuizMatch();
+      setTimeout(()=>{ q.wrongFlash = null; renderQuizMatch(); }, 500);
+    }
+    return;
+  }
+
+  if(e.target.closest('#backHome')){ goHome(); return; }
+  if(e.target.closest('#backChapter')){ goChapter(state.chapterId); return; }
+
+  // TOGGLE BALIK KARTU
+  const toggleRev = e.target.closest('#toggleReverse');
+  if(toggleRev){
+    state.reverseMode = !state.reverseMode;
+    safeSet(STORE.reverseMode, state.reverseMode);
+    renderDeck(state.chapterId, state.groupId);
+    return;
+  }
+
+  // TOGGLE AUTO TTS
+  const toggleAutoTTS = e.target.closest('#toggleAutoTTS');
+  if(toggleAutoTTS){
+    state.autoTTS = !state.autoTTS;
+    safeSet(STORE.autoTTS, state.autoTTS);
+    renderDeck(state.chapterId, state.groupId);
+    if(state.autoTTS) playCurrentCardTTS();
+    return;
+  }
+
+  if(e.target.closest('#shuffleDeck')){
+    const chap = CHAPTERS.find(c => c.id === state.chapterId);
+    if (chap) {
+      const g = chap.groups.find(gr => gr.id === state.groupId);
+      if (g) {
+        let pool = g.cards.map((_,i)=>i).filter(i => !excludedSet.has(cardUid(g.id, i)));
+        if(pool.length === 0) pool = g.cards.map((_,i)=>i);
+        state.order = shuffleArray(pool);
+        state.cardIndex = 0;
+        state.shuffled = true;
+        renderDeck(state.chapterId, state.groupId);
+        playCurrentCardTTS();
+      }
+    }
+    return;
+  }
+
+  if(e.target.closest('#resetProgress')){
+    if(confirm('Setel ulang seluruh progres hafalan Bab 6?')){
+      Object.values(STORE).forEach(k => localStorage.removeItem(k));
+      location.reload();
+    }
+    return;
+  }
+
+  const prevBtn = e.target.closest('#prevCard');
+  if(prevBtn && !prevBtn.disabled){ 
+    state.cardIndex = Math.max(0, state.cardIndex-1); 
+    renderDeck(state.chapterId, state.groupId); 
+    playCurrentCardTTS();
+    return; 
+  }
+
+  const nextBtn = e.target.closest('#nextCard');
+  if(nextBtn && !nextBtn.disabled){ 
+    state.cardIndex = Math.min(state.order.length-1, state.cardIndex+1); 
+    renderDeck(state.chapterId, state.groupId); 
+    playCurrentCardTTS();
+    return; 
+  }
+
+  const soundBtn = e.target.closest('.sound-btn');
+  if(soundBtn){
+    const chap = CHAPTERS.find(c => c.id === state.chapterId);
+    if (chap) {
+      const g = chap.groups.find(gr => gr.id === state.groupId);
+      if (g) {
+        const card = g.cards[state.order[state.cardIndex]];
+        if (card) {
+          if(card.type === 'kanji'){
+            speakKana(card.words.map(w => w.jp).join('、'));
+          } else {
+            speakKana(card.kana);
+          }
+        }
+      }
+    }
+    return;
+  }
+
+  const exBtn = e.target.closest('#excludeCard');
+  if(exBtn){
+    const chap = CHAPTERS.find(c => c.id === state.chapterId);
+    if (chap) {
+      const g = chap.groups.find(gr => gr.id === state.groupId);
+      if (g) {
+        const uid = cardUid(g.id, state.order[state.cardIndex]);
+        if(excludedSet.has(uid)) excludedSet.delete(uid); else excludedSet.add(uid);
+        saveExcluded();
+        renderDeck(state.chapterId, state.groupId);
+      }
+    }
+    return;
+  }
+
+  const cardEl = e.target.closest('#activeCard');
+  if(cardEl){
+    cardEl.classList.toggle('flipped');
+    const chap = CHAPTERS.find(c => c.id === state.chapterId);
+    if (chap) {
+      const g = chap.groups.find(gr => gr.id === state.groupId);
+      if (g) {
+        const uid = cardUid(g.id, state.order[state.cardIndex]);
+        if(cardEl.classList.contains('flipped') && !learnedSet.has(uid)){
+          learnedSet.add(uid);
+          cardEl.classList.add('is-learned');
+          saveLearned();
+        }
+      }
+    }
+    return;
+  }
+});
+
+/* ============================================================
+   THEME & STREAK
+   ============================================================ */
+const app = document.getElementById('app');
+const toggle = document.getElementById('themeToggle');
+const knobIcon = document.getElementById('knobIcon');
+const sunPath = '<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>';
+const moonPath = '<path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/>';
+
+function applyTheme(t){ app.setAttribute('data-theme', t); knobIcon.innerHTML = t==='dark' ? moonPath : sunPath; }
+applyTheme(safeGet(STORE.theme, 'light'));
+toggle.addEventListener('click', ()=>{ const next = app.getAttribute('data-theme')==='dark'?'light':'dark'; applyTheme(next); safeSet(STORE.theme, next); });
+
+(function updateStreak(){
+  const todayKey = new Date().toDateString();
+  const lastVisit = safeGet(STORE.lastVisit, null);
+  let streak = safeGet(STORE.streak, 0);
+  if(lastVisit !== todayKey){
+    const y = new Date(); y.setDate(y.getDate()-1);
+    streak = (lastVisit === y.toDateString()) ? streak+1 : 1;
+    safeSet(STORE.streak, streak); safeSet(STORE.lastVisit, todayKey);
+  } else if(!streak){
+    streak = 1; safeSet(STORE.streak, streak); safeSet(STORE.lastVisit, todayKey);
+  }
+})();
+
+/* ============================================================
+   PETALS ANIMATION
+   ============================================================ */
+const petalHost = document.getElementById('petals');
+for(let i=0; i<8; i++){
+  const p = document.createElement('div'); p.className = 'petal';
+  p.style.left = (Math.random()*100)+'%';
+  const s = 5+Math.random()*5;
+  p.style.width = s+'px'; p.style.height = s+'px';
+  p.style.setProperty('--drift', (Math.random()*50-25)+'px');
+  p.style.animationDuration = (7+Math.random()*5)+'s';
+  p.style.animationDelay = (Math.random()*-10)+'s';
+  petalHost.appendChild(p);
+}
+
+render();
+</script>
+</body>
+</html>
